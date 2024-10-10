@@ -1,18 +1,15 @@
 package com.example.katas
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.katas.adapter.MoviesAdapter
 import com.example.katas.databinding.ActivityMainBinding
+import com.example.katas.service.ApiInterface
+import com.example.katas.service.ApiService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -22,23 +19,39 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate((layoutInflater))
         setContentView(binding.root)
-        initRecyclerVIew()
+        getMovieData {
+            initRecyclerVIew(it)
+        }
 
 
     }
 
-    private fun initRecyclerVIew() {
+
+
+    private fun getMovieData(callback: (List<Movie >) -> Unit) {
+        val apiService = ApiService.getInstance().create(ApiInterface::class.java)
+        apiService.getMovies().enqueue(object : Callback<Movies> {
+            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+                return callback(response.body()!!.results)
+            }
+
+            override fun onFailure(p0: Call<Movies>, p1: Throwable) {
+
+            }
+
+        })
+    }
+
+     fun initRecyclerVIew(movieList: List<Movie>  )  {
         val manager = LinearLayoutManager(this)
         binding.movieRecycler.layoutManager = manager
-        val moviesProvider = MoviesProvider()
-        binding.movieRecycler.adapter = MoviesAdapter(moviesProvider.MoviesList) { dataMovies ->
-            onItemSelected(dataMovies)
 
-
-        }
-    }
-
-    private fun onItemSelected(movies: DataMovies) {
-        Toast.makeText(this, movies.titulo, Toast.LENGTH_SHORT).show()
+        binding.movieRecycler.adapter = MoviesAdapter(movieList)
     }
 }
+
+
+
+
+
+
