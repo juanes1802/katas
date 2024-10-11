@@ -1,5 +1,6 @@
 package com.example.katas
 
+import com.google.gson.annotations.SerializedName
 import retrofit2.Retrofit
 
 data class Movies(
@@ -8,13 +9,15 @@ data class Movies(
 )
 
 data class Movie (
-    val id : Long,
-    val original_title : String?,
+    val title : String?,
+    @SerializedName("release_date")
+    val releaseDate : String?,
     val overview:String?,
-    val poster_path: String?,
-
-
+    @SerializedName("poster_path")
+    val posterPath: String?,
 )
+
+
 
 
 

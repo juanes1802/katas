@@ -1,5 +1,6 @@
 package com.example.katas
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -57,13 +58,14 @@ class Login : AppCompatActivity() {
 
 
     }
+
     fun validateInputs() {
         val usuario = editTextUsuario.text.toString()
         val contrasena = editTextContrasena.text.toString()
 
         ButtonLogin.isEnabled = usuario.isNotEmpty() && contrasena.isNotEmpty()
 
-        ButtonLogin.setBackgroundColor(if (ButtonLogin.isEnabled) Color.BLACK else Color.DKGRAY)
+        ButtonLogin.setBackgroundColor(if (ButtonLogin.isEnabled)getColor(R.color.blackButton ) else getColor(R.color.grayButton))
 
 
     }

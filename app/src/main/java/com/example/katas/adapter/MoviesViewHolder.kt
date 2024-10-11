@@ -13,10 +13,10 @@ class MoviesViewHolder(view: View):RecyclerView.ViewHolder(view){
     private val binding = ViewMoviesBinding.bind(view)
 
     fun render(MoviesModel: Movie) {
-        binding.tvTitle.text = MoviesModel.id.toString()
-        binding.tvYear.text = MoviesModel.original_title
-        binding.tvActors.text = MoviesModel.overview
-        val imageURL = IMAGE_URL+ "w500" + MoviesModel.poster_path
+        binding.tvTitle.text = MoviesModel.title
+        binding.tvYear.text = MoviesModel.releaseDate
+        binding.tvOverview.text = MoviesModel.overview
+        val imageURL = IMAGE_URL+ "w500" + MoviesModel.posterPath
 
         Glide.with(binding.imageView.context)
             .load(imageURL)

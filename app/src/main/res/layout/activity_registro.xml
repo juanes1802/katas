@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registro"
+    android:padding="16dp">
+
+    <ImageButton
+        android:id="@+id/btnRegresarLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/flecha_atras"
+        android:background="#FFF"
+        android:layout_margin="13dp"
+        android:contentDescription="Back arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="115dp"
+        android:layout_height="58dp"
+        android:src="@drawable/imdb_logo_2016_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="38dp"/>
+
+    <TextView
+        android:id="@+id/txCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Crear Una cuenta"
+        android:textColor="@color/blackButton"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/nombreRegistro"
+        app:layout_constraintTop_toBottomOf="@id/logo"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nombreRegistro"
+        android:layout_width="321dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="20dp"
+        android:hint="Nombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txCuenta">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/CorreoInput"
+        android:layout_width="321dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="20dp"
+        android:hint="Correo Electrónico"
+        app:layout_constraintTop_toBottomOf="@id/nombreRegistro"
+        app:layout_constraintStart_toStartOf="@id/nombreRegistro">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/contrasenaRegistro"
+        android:layout_width="321dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="20dp"
+        android:hint="Contraseña"
+        app:passwordToggleEnabled = "true"
+        app:layout_constraintTop_toBottomOf="@id/CorreoInput"
+        app:layout_constraintStart_toStartOf="@id/CorreoInput">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextContrasenaRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/ValueContrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="La contraseña debe contener 8 caracteres"
+        app:layout_constraintTop_toBottomOf="@id/contrasenaRegistro"
+        app:layout_constraintStart_toStartOf="@id/contrasenaRegistro"
+        android:layout_marginTop="10dp"/>
+
+    <android.widget.Button
+        android:id="@+id/buttonAceptarRegistro"
+        android:layout_width="321dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/button_background"
+        android:text="Aceptar"
+        android:textAllCaps="false"
+
+        android:textSize="20sp"
+        android:textColor="#D8D8D8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contrasenaRegistro"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

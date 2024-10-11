@@ -8,17 +8,13 @@
     tools:context=".Login"
     android:background="@color/yellow">
 
-    <TextView
+    <ImageView
         android:id="@+id/logoApp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="169dp"
+        android:layout_height="84dp"
         android:layout_marginTop="72dp"
-        android:text="@string/imdb"
-        android:textAlignment="center"
-        android:textSize="40sp"
-        android:textStyle="bold"
+        android:src="@drawable/imdb_logo_2016_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,22 +23,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="68dp"
         android:layout_marginTop="12dp"
         android:text="@string/usuario"
         android:textColor="@color/black"
-        android:textSize="20sp"
 
+
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoApp" />
 
     <EditText
         android:id="@+id/usuario_input"
-        android:layout_width="370dp"
+        android:layout_width="275dp"
         android:layout_height="59dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/border"
         android:padding="10dp"
+        android:textColorHint="#707070"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/usuarioLabel" />
@@ -52,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="68dp"
         android:layout_marginTop="16dp"
         android:text="@string/contrase_a"
         android:textColor="@color/black"
@@ -63,43 +61,46 @@
 
     <EditText
         android:id="@+id/contrasena_input"
-        android:layout_width="370dp"
+        android:layout_width="275dp"
         android:layout_height="59dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/border"
         android:inputType="textPassword"
         android:padding="10dp"
+
+        android:textColorHint="#707070"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/contrasenaLabel" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="275dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="12dp"
         android:text="¿olvidaste tu contraseña?"
         android:textSize="17dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/contrasena_input" />
 
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLogin"
-        android:layout_width="370dp"
-        android:layout_height="64dp"
+        android:layout_width="275dp"
+        android:layout_height="54dp"
+
         android:background="@drawable/button_background"
+        android:enabled="true"
         android:text="Login"
-        android:textSize="20sp"
         android:textAllCaps="false"
-        android:enabled="false"
         android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contrasena_input"
-        app:layout_constraintVertical_bias="0.139" />
-
+        app:layout_constraintVertical_bias="0.154" />
 
     <TextView
         android:id="@+id/labelFormasIngreso"
@@ -152,10 +153,9 @@
             android:id="@+id/button_google"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:background="@drawable/button_rounded"
             android:contentDescription="google_icon"
-            android:src="@drawable/ic_google" />
+            android:src="@drawable/google_ic" />
 
 
     </LinearLayout>
