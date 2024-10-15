@@ -9,6 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,9 @@ class Login : AppCompatActivity() {
     private lateinit var editTextContrasena: EditText
     private lateinit var ButtonLogin: Button
     private lateinit var LabelInvitado: TextView
+    private lateinit var labelRegistrase : TextView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +33,8 @@ class Login : AppCompatActivity() {
         editTextContrasena = findViewById(R.id.contrasena_input)
         ButtonLogin = findViewById(R.id.buttonLogin)
         LabelInvitado = findViewById(R.id.labeInvitado)
+        labelRegistrase = findViewById(R.id.labelRegistrase)
+
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -53,6 +59,10 @@ class Login : AppCompatActivity() {
 
         LabelInvitado.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        labelRegistrase.setOnClickListener{
+            val intent = Intent(this, Registro::class.java)
             startActivity(intent)
         }
 

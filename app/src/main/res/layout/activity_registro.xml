@@ -5,29 +5,29 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registro"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".Registro">
 
     <ImageButton
         android:id="@+id/btnRegresarLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/flecha_atras"
-        android:background="#FFF"
         android:layout_margin="13dp"
+        android:background="#FFF"
         android:contentDescription="Back arrow"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:src="@drawable/flecha_atras"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="115dp"
         android:layout_height="58dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="38dp"
         android:src="@drawable/imdb_logo_2016_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="38dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txCuenta"
@@ -37,11 +37,11 @@
         android:text="Crear Una cuenta"
         android:textColor="@color/blackButton"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/nombreRegistro"
-        app:layout_constraintTop_toBottomOf="@id/logo"/>
+        app:layout_constraintStart_toStartOf="@+id/textNombre"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nombreRegistro"
+        android:id="@+id/textNombre"
         android:layout_width="321dp"
         android:layout_height="55dp"
         android:layout_marginTop="20dp"
@@ -51,52 +51,53 @@
         app:layout_constraintTop_toBottomOf="@id/txCuenta">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextNombre"
+            android:id="@+id/inputNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/CorreoInput"
+        android:id="@+id/textCorreo"
         android:layout_width="321dp"
         android:layout_height="55dp"
         android:layout_marginTop="20dp"
         android:hint="Correo Electrónico"
-        app:layout_constraintTop_toBottomOf="@id/nombreRegistro"
-        app:layout_constraintStart_toStartOf="@id/nombreRegistro">
+        app:layout_constraintStart_toStartOf="@id/textNombre"
+        app:layout_constraintTop_toBottomOf="@id/textNombre">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextCorreo"
+            android:id="@+id/inputCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/contrasenaRegistro"
+        android:id="@+id/textContrasena"
         android:layout_width="321dp"
         android:layout_height="55dp"
         android:layout_marginTop="20dp"
         android:hint="Contraseña"
-        app:passwordToggleEnabled = "true"
-        app:layout_constraintTop_toBottomOf="@id/CorreoInput"
-        app:layout_constraintStart_toStartOf="@id/CorreoInput">
+        app:layout_constraintStart_toStartOf="@id/textCorreo"
+        app:layout_constraintTop_toBottomOf="@id/textCorreo"
+        app:passwordToggleEnabled="true">
+
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextContrasenaRegistro"
+            android:id="@+id/inputContrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/ValueContrasena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="La contraseña debe contener 8 caracteres"
-        app:layout_constraintTop_toBottomOf="@id/contrasenaRegistro"
-        app:layout_constraintStart_toStartOf="@id/contrasenaRegistro"
-        android:layout_marginTop="10dp"/>
+        app:layout_constraintStart_toStartOf="@id/textContrasena"
+        app:layout_constraintTop_toBottomOf="@id/textContrasena" />
 
     <android.widget.Button
         android:id="@+id/buttonAceptarRegistro"
@@ -107,12 +108,11 @@
         android:text="Aceptar"
         android:textAllCaps="false"
 
-        android:textSize="20sp"
         android:textColor="#D8D8D8"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contrasenaRegistro"/>
-
+        app:layout_constraintTop_toBottomOf="@id/textContrasena" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

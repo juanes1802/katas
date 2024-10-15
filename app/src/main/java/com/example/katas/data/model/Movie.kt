@@ -1,4 +1,4 @@
-package com.example.katas
+package com.example.katas.data.model
 
 import com.google.gson.annotations.SerializedName
 import retrofit2.Retrofit
