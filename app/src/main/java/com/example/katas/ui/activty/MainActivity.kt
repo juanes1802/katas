@@ -2,18 +2,50 @@ package com.example.katas
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
+import com.example.katas.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        setupNavigation()
+    }
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BuscarFragment())
-                .commit()
+    private fun setupNavigation() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        // Vincular el BottomNavigationView con el NavController
+        binding.bottomNavigation.setupWithNavController(navController)
+
+        // Manejar la navegación manualmente
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    navController.navigate(R.id.page_inicio)
+                    true
+                }
+                R.id.nav_search -> {
+                    navController.navigate(R.id.page_buscar)
+                    true
+                }
+                R.id.nav_play -> {
+                    navController.navigate(R.id.page_play)
+                    true
+                }
+                R.id.nav_user -> {
+                    navController.navigate(R.id.page_perfil)
+                    true
+                }
+                else -> false
+            }
         }
     }
 }

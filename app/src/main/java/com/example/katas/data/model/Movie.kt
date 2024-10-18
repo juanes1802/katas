@@ -8,6 +8,11 @@ data class Movies(
     val results: List<Movie>
 )
 
+data class Movies2(
+    val page: Int?,
+    val results: List<Movie2>
+)
+
 data class Movie (
     val title : String?,
     @SerializedName("release_date")
@@ -15,6 +20,16 @@ data class Movie (
     val overview:String?,
     @SerializedName("poster_path")
     val posterPath: String?,
+)
+
+data class Movie2 (
+    val title : String?,
+    @SerializedName("vote_average")
+    val  rating : String?,
+    @SerializedName("poster_path")
+    val posterPath: String?,
+
+
 )
 
 

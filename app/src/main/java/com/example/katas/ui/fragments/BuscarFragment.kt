@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.katas.adapter.MoviesAdapter
+import com.example.katas.data.model.Movie
+import com.example.katas.data.model.Movies
 import com.example.katas.databinding.FragmentMoviesBinding
 import com.example.katas.service.ApiInterface
 import com.example.katas.service.ApiService
@@ -16,7 +18,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class BuscarFragment : Fragment() {
+class BuscarFragment : Fragment(R.layout.fragment_movies) {
+
 
     private var  _binding : FragmentMoviesBinding? = null
     private val   binding get() = _binding!!
@@ -39,7 +42,7 @@ class BuscarFragment : Fragment() {
         }
     }
 
-    private fun getMovieData(callback: (List<Movie >) -> Unit) {
+    private fun getMovieData(callback: (List<Movie>) -> Unit) {
         val apiService = ApiService.getInstance().create(ApiInterface::class.java)
         apiService.getMovies().enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {

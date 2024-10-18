@@ -3,9 +3,11 @@ package com.example.katas.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.katas.Movie
+
 
 import com.example.katas.R
+import com.example.katas.data.model.Movie
+import com.example.katas.data.model.Movie2
 
 class MoviesAdapter(private val MoviesList: List<Movie>) :
     RecyclerView.Adapter<MoviesViewHolder>() {
@@ -23,3 +25,9 @@ class MoviesAdapter(private val MoviesList: List<Movie>) :
     }
 
 }
+
+
+
+
+
+

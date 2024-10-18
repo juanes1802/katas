@@ -5,7 +5,9 @@ import android.view.View.OnClickListener
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-import com.example.katas.Movie
+
+import com.example.katas.data.model.Movie
+import com.example.katas.data.model.Movie2
 import com.example.katas.databinding.ViewMoviesBinding
 import com.example.katas.service.ApiService.Companion.IMAGE_URL
 
@@ -28,3 +30,4 @@ class MoviesViewHolder(view: View):RecyclerView.ViewHolder(view){
 
     }
 }
+
