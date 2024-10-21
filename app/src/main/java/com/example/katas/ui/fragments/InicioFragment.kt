@@ -34,12 +34,13 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getMovieData2 { initRecyclerVIew2(it) }
+        getPopularMovies { initPopularRecyclerView(it) }
+        getTopRatedMovies { initRatingRecyclerView (it) }
     }
 
-    private fun getMovieData2(callback: (List<Movie2>) -> Unit) {
+    private fun getPopularMovies(callback: (List<Movie2>) -> Unit) {
         val apiService = ApiService.getInstance().create(ApiInterface2::class.java)
-        apiService.getMovies2().enqueue(object : Callback<Movies2> {
+        apiService.getPopularMovies().enqueue(object : Callback<Movies2> {
             override fun onResponse(call: Call<Movies2>, response: Response<Movies2>) {
                 if (response.isSuccessful && response.body() != null) {
                     callback(response.body()!!.results)
@@ -52,13 +53,40 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
         })
     }
 
-    fun initRecyclerVIew2(movieList: List<Movie2>) {
+    private fun getTopRatedMovies(callback: (List<Movie2>) -> Unit) {
+        val apiService = ApiService.getInstance().create(ApiInterface2::class.java)
+        apiService.getTopRatedMovies().enqueue(object : Callback<Movies2> {
+            override fun onResponse(call: Call<Movies2>, response: Response<Movies2>) {
+                if (response.isSuccessful && response.body() != null) {
+                    callback(response.body()!!.results)
+                }
+            }
+
+            override fun onFailure(call: Call<Movies2>, t: Throwable) {
+
+            }
+        })
+    }
+
+
+
+    private fun initPopularRecyclerView(movieList: List<Movie2>) {
 
         val manager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.recyclerView.layoutManager = manager
+        binding.recyclerViewPopular.layoutManager = manager
 
         // Asigna el adapter al RecyclerView
-        binding.recyclerView.adapter = MoviesAdapter2(movieList)
+        binding.recyclerViewPopular.adapter = MoviesAdapter2(movieList)
+    }
+
+
+    fun initRatingRecyclerView(movieList: List<Movie2>) {
+
+        val manager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewRating.layoutManager = manager
+
+
+        binding.recyclerViewRating.adapter = MoviesAdapter2(movieList)
     }
 
     override fun onDestroyView() {
@@ -66,3 +94,5 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
         _binding = null
     }
 }
+
+

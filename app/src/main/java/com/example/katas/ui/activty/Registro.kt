@@ -60,7 +60,7 @@ class Registro : AppCompatActivity() {
         val correo = inputCorreo.text
         val contrasena = inputContrasena.text
 
-        buttonAceptarRegistro.isEnabled = nombre.isNotEmpty() && correo.isNotEmpty() &&   contrasena.isNotEmpty()
+        buttonAceptarRegistro.isEnabled = nombre.isNotEmpty() && correo.isNotEmpty() &&  contrasena.isNotEmpty()
 
         buttonAceptarRegistro.setBackgroundColor(
             if (buttonAceptarRegistro.isEnabled) getColor(R.color.blackButton) else getColor(

@@ -90,7 +90,7 @@
         android:layout_height="54dp"
 
         android:background="@drawable/button_background"
-        android:enabled="true"
+        android:enabled="false"
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="@color/white"
