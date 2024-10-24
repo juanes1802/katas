@@ -29,6 +29,8 @@ class SearchViewModel : ViewModel() {
                     val movieSearch = response.body()!!.results
                     withContext(Dispatchers.Main) {
                         _movies.value = movieSearch
+                        originalMovieList = movieSearch
+                        _filteredMovies.value = movieSearch
                     }
 
                 }

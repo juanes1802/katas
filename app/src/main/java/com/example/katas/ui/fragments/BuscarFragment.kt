@@ -56,7 +56,7 @@ class BuscarFragment : Fragment(R.layout.fragment_movies) {
 
             initRecyclerVIew(movies)
         }
-        // iniciar la carga de datos
+
 
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
