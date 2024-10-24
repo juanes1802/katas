@@ -1,19 +1,19 @@
 package com.example.katas.data.model
 
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.annotations.SerializedName
-import retrofit2.Retrofit
 
-data class Movies(
+data class  MoviesSearch(
     val page: Int?,
-    val results: List<Movie>
+    val results: List<MovieSearch>
 )
 
-data class Movies2(
+data class MoviesTopRatedAndPopular(
     val page: Int?,
-    val results: List<Movie2>
+    val results: List<MovieTopRatedAndPopular>
 )
 
-data class Movie (
+data class MovieSearch (
     val title : String?,
     @SerializedName("release_date")
     val releaseDate : String?,
@@ -22,7 +22,7 @@ data class Movie (
     val posterPath: String?,
 )
 
-data class Movie2 (
+data class MovieTopRatedAndPopular (
     val title : String?,
     @SerializedName("vote_average")
     val  rating : String?,

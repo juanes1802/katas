@@ -6,16 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.katas.adapter.MoviesAdapter
-import com.example.katas.data.model.Movie
-import com.example.katas.data.model.Movies
+import com.example.katas.adapter.MoviesAdapterSearch
+import com.example.katas.data.model.MovieSearch
 import com.example.katas.databinding.FragmentMoviesBinding
-import com.example.katas.service.ApiInterface
-import com.example.katas.service.ApiService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.katas.viewmodel.SearchViewModel
 
 
 class BuscarFragment : Fragment(R.layout.fragment_movies) {
@@ -23,6 +19,7 @@ class BuscarFragment : Fragment(R.layout.fragment_movies) {
 
     private var  _binding : FragmentMoviesBinding? = null
     private val   binding get() = _binding!!
+    lateinit var  searchViewModel : SearchViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,37 +32,28 @@ class BuscarFragment : Fragment(R.layout.fragment_movies) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getMovieData{
-            initRecyclerVIew(it)
 
+        searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
+        // observa los cambios  en la lista de peliculas
 
+        searchViewModel.movies.observe(viewLifecycleOwner){
+            movies -> initRecyclerVIew(movies)
         }
+        // iniciar la carga de datos
+        searchViewModel.loadMovies()
+
     }
 
-    private fun getMovieData(callback: (List<Movie>) -> Unit) {
-        val apiService = ApiService.getInstance().create(ApiInterface::class.java)
-        apiService.getMovies().enqueue(object : Callback<Movies> {
-            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
-                if (response.isSuccessful && response.body() != null) {
-                    callback(response.body()!!.results)
-                }
-
-            }
 
 
 
 
-            override fun onFailure(p0: Call<Movies>, p1: Throwable) {
 
-            }
-
-        })
-    }
-    fun initRecyclerVIew(movieList: List<Movie>  )  {
+    fun initRecyclerVIew(movieSearchList: List<MovieSearch>  )  {
         val manager = LinearLayoutManager(requireContext())
         binding.movieRecycler.layoutManager = manager
 
-        binding.movieRecycler.adapter = MoviesAdapter(movieList)
+        binding.movieRecycler.adapter = MoviesAdapterSearch(movieSearchList)
     }
 
     override fun onDestroyView() {
@@ -76,4 +64,4 @@ class BuscarFragment : Fragment(R.layout.fragment_movies) {
 
 
 
-}
+} // del oncreate
