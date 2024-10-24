@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.katas.R
 import com.example.katas.data.model.MovieSearch
 
-class MoviesAdapterSearch(private val moviesList: List<MovieSearch>) :
+class MoviesAdapterSearch(private var moviesList: List<MovieSearch>) :
     RecyclerView.Adapter<MoviesViewHolderSearch>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolderSearch {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -21,6 +21,11 @@ class MoviesAdapterSearch(private val moviesList: List<MovieSearch>) :
     override fun onBindViewHolder(holder: MoviesViewHolderSearch, position: Int) {
         holder.render(moviesList[position])
 
+    }
+
+    fun updateList(newMovieLList: List<MovieSearch>){
+        moviesList = newMovieLList
+        notifyDataSetChanged()
     }
 
 }

@@ -15,6 +15,10 @@ class SearchViewModel : ViewModel() {
     private val _movies = MutableLiveData<List<MovieSearch>>()
     val movies: LiveData<List<MovieSearch>> = _movies
 
+    private var _filteredMovies =  MutableLiveData<List<MovieSearch>>()
+
+      val filteredMovies:LiveData<List<MovieSearch>> = _filteredMovies
+    private var  originalMovieList: List<MovieSearch> = emptyList()
 
     fun loadMovies() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -34,5 +38,15 @@ class SearchViewModel : ViewModel() {
 
             }
         }
+
+
+
+    }
+    fun filterMovies(title: String) {
+        val filteredList = originalMovieList.filter {
+            it.title?.toLowerCase()?.contains(title.toLowerCase()) == true
+
+        }
+        _filteredMovies.value = filteredList
     }
 }

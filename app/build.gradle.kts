@@ -44,6 +44,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.room.ktx)
     val lifecycle_version = "2.8.5"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

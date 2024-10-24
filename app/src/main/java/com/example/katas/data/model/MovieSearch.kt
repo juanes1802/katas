@@ -13,7 +13,7 @@ data class MoviesTopRatedAndPopular(
     val results: List<MovieTopRatedAndPopular>
 )
 
-data class MovieSearch (
+ data class MovieSearch (
     val title : String?,
     @SerializedName("release_date")
     val releaseDate : String?,
