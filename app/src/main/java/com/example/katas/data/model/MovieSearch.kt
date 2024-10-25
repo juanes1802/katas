@@ -7,13 +7,7 @@ data class  MoviesSearch(
     val page: Int?,
     val results: List<MovieSearch>
 )
-
-data class MoviesTopRatedAndPopular(
-    val page: Int?,
-    val results: List<MovieTopRatedAndPopular>
-)
-
- data class MovieSearch (
+data class MovieSearch (
     val title : String?,
     @SerializedName("release_date")
     val releaseDate : String?,
@@ -21,6 +15,13 @@ data class MoviesTopRatedAndPopular(
     @SerializedName("poster_path")
     val posterPath: String?,
 )
+
+
+data class MoviesTopRatedAndPopular(
+    val page: Int?,
+    val results: List<MovieTopRatedAndPopular>
+)
+
 
 data class MovieTopRatedAndPopular (
     val title : String?,
