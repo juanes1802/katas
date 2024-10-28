@@ -28,8 +28,7 @@ class MainActivity : AppCompatActivity() {
         // Manejar la navegación manualmente
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> {
-                    navController.navigate(R.id.page_inicio)
+                R.id.nav_home -> {    navController.navigate(R.id.page_inicio)
                     true
                 }
                 R.id.nav_search -> {

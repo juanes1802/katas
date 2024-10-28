@@ -3,6 +3,7 @@ package com.example.katas.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.katas.data.model.MovieTopRatedAndPopular
 import com.example.katas.data.model.MoviesTopRatedAndPopular
 import com.example.katas.data.network.ApiInterfaceTopRatingAndPopular
@@ -18,7 +19,6 @@ class MoviesViewModel : ViewModel() {
     val moviesRated: LiveData<List<MovieTopRatedAndPopular>> = _moviesRated
     private var _moviesPopular = MutableLiveData<List<MovieTopRatedAndPopular>>()
     var moviesPopular: LiveData<List<MovieTopRatedAndPopular>> = _moviesPopular
-
 
 
     fun loadMoviesRated() {

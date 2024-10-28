@@ -5,7 +5,7 @@
     <color name="colorNoSelected">#80000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#F6C700</color>
-    <color name="grayButton">#9D9C9C</color>
+    <color name="grayButtonAndText">#9D9C9C</color>
     <color name="grayBackground">#00000029</color>
     <color name="blackButton">#4B4747</color>
     <color name="gray_shadow">#00000029</color>
