@@ -1,60 +1,102 @@
 package com.example.katas.ui.fragments
 
+import DetalleViewModel
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.katas.R
+import com.example.katas.data.model.MovieDetalle
+import com.example.katas.databinding.FragmentDetalleBinding
+import com.example.katas.service.ApiService.Companion.IMAGE_URL
+import com.example.katas.ui.adapter.MoviesAdapterDetail
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetalleFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class DetalleFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class DetalleFragment : Fragment(R.layout.fragment_detalle) {
+    private lateinit var adapter: MoviesAdapterDetail
+    private var _binding: FragmentDetalleBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: DetalleViewModel by viewModels()
+    private val args: DetalleFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalle, container, false)
+    ): View {
+        _binding = FragmentDetalleBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetalleFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetalleFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        val movieId = args.movieId
+
+        adapter = MoviesAdapterDetail(emptyList())
+        viewModel.fetchRecommendations(movieId)
+        viewModel.fetchMovieDetails(movieId)
+
+        InitRecyclerView()
+
+        viewModel.recommendations.observe(viewLifecycleOwner) { recommendations ->
+            adapter.updateList(recommendations)
+        }
+
+        viewModel.movieDetails.observe(viewLifecycleOwner) { movieDetail ->
+            renderDetails(
+                movieDetail
+            )
+        }
+        binding.btnatrasdetalle.setOnClickListener{
+
+            requireActivity().onBackPressed()
+        }
+
+
+    }
+
+    private fun renderDetails(movieDetail: MovieDetalle) {
+        movieDetail?.let {
+            binding.textTitleOriginal.text = movieDetail.originalTitle
+            binding.textTitleDetalle.text = movieDetail.title
+            binding.textTitleOriginalDetalle.text = movieDetail.originalTitle + "(Titulo Original )"
+            binding.RatingDetalle.text = movieDetail.rating
+            binding.textOverViewDetail.text = movieDetail.overview
+            val imageURL = IMAGE_URL + "w500" + movieDetail.posterPath
+            val imageURLback = IMAGE_URL + "w500" + movieDetail.backdropPath
+
+            if (movieDetail.genres.isNotEmpty()){
+              val   firstGenreName = movieDetail.genres[0].name
+                binding.TextGenre.text = firstGenreName
+            }else{
+                binding.TextGenre.text = "N"
             }
+
+            Glide.with(binding.Portadadetalle.context)
+                .load(imageURL)
+                .into(binding.Portadadetalle)
+
+            Glide.with(binding.imagePreview.context)
+                .load(imageURLback)
+                .into(binding.imagePreview)
+        }
+    }
+
+    private fun InitRecyclerView() {
+        binding.recyclerViewRecomendaciones.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerViewRecomendaciones.adapter = MoviesAdapterDetail(emptyList())
+        binding.recyclerViewRecomendaciones.adapter = adapter
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

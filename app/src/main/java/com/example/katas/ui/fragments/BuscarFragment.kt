@@ -1,19 +1,18 @@
 package com.example.katas
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.databinding.adapters.SearchViewBindingAdapter.OnQueryTextChange
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.util.query
 import com.example.katas.adapter.MoviesAdapterSearch
 import com.example.katas.data.model.MovieSearch
-import com.example.katas.data.model.MoviesSearch
 import com.example.katas.databinding.FragmentMoviesBinding
 import com.example.katas.viewmodel.SearchViewModel
 
@@ -53,8 +52,10 @@ class BuscarFragment : Fragment(R.layout.fragment_movies) {
         searchViewModel.loadMovies()
 
         searchViewModel.movies.observe(viewLifecycleOwner) { movies ->
+            if (movies.isNotEmpty()) {
 
-            initRecyclerVIew(movies)
+                initRecyclerVIew(movies)
+            }
         }
 
 
@@ -71,16 +72,24 @@ class BuscarFragment : Fragment(R.layout.fragment_movies) {
             }
 
 
+
         })
 
     }
 
     fun initRecyclerVIew(movieSearchList: List<MovieSearch>) {
         val manager = LinearLayoutManager(requireContext())
-        adapter  = MoviesAdapterSearch(movieSearchList)
+        adapter  = MoviesAdapterSearch(movieSearchList){movie -> onMovieClick(movie)}
         binding.movieRecycler.layoutManager = manager
 
         binding.movieRecycler.adapter = adapter
+    }
+    fun onMovieClick(movie: MovieSearch) {
+        movie.id?.let { movieId ->
+            val action = BuscarFragmentDirections.actionPageBuscarToPageDetail(movieId)
+            findNavController().navigate(action)
+            Log.d("BuscarFragment", "Navegando a DetalleFragment con movieId: $movieId")
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

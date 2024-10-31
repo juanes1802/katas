@@ -17,6 +17,7 @@
         <action
             android:id="@+id/action_page_inicio_to_page_perfil"
             app:destination="@id/page_perfil" />
+
     </fragment>
 
 
@@ -33,6 +34,23 @@
         <action
             android:id="@+id/action_page_buscar_to_page_perfil"
             app:destination="@id/page_perfil" />
+        <action
+            android:id="@+id/action_page_buscar_to_page_detail"
+            app:destination="@id/detalleFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalleFragment"
+        android:name="com.example.katas.ui.fragments.DetalleFragment"
+        tools:layout="@layout/fragment_detalle"
+
+        >
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            />
+
 
     </fragment>
 

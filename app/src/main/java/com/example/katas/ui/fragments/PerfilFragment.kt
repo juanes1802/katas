@@ -24,7 +24,7 @@ class PerfilFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Aquí puedes manipular la vista, por ejemplo, estableciendo el texto
-        binding.texto.text = "Fragment Perfil"
+
     }
 
     override fun onDestroyView() {

@@ -3,9 +3,7 @@ package com.example.katas.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.katas.data.model.MovieTopRatedAndPopular
-import com.example.katas.data.model.MoviesTopRatedAndPopular
 import com.example.katas.data.network.ApiInterfaceTopRatingAndPopular
 import com.example.katas.service.ApiService
 import kotlinx.coroutines.CoroutineScope

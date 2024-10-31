@@ -11,6 +11,7 @@
     <color name="gray_shadow">#00000029</color>
     <color name="gray_line">#f5f5f5</color>
     <color name="color_barrita">#F5C518</color>
+    <color name="color_separator">#707070</color>
 
 
 </resources>
