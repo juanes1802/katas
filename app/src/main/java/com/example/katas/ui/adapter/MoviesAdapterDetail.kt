@@ -1,6 +1,5 @@
 package com.example.katas.ui.adapter
 
-import MoviesViewHolderDetail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +11,8 @@ class MoviesAdapterDetail(
 ) : RecyclerView.Adapter<MoviesViewHolderDetail>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolderDetail {
-       val layoutInflater = LayoutInflater.from(parent.context)
-        return MoviesViewHolderDetail(layoutInflater.inflate(R.layout.items_movies_inicio,parent,false))
+        val layoutInflater = LayoutInflater.from(parent.context)
+        return MoviesViewHolderDetail(layoutInflater.inflate(R.layout.items_movies_inicio, parent, false))
     }
 
     override fun onBindViewHolder(holder: MoviesViewHolderDetail, position: Int) {
@@ -23,7 +22,7 @@ class MoviesAdapterDetail(
 
     override fun getItemCount(): Int = recommendations.size
 
-    fun updateList(newRecommendation: List<MovieDetalle>){
+    fun updateList(newRecommendation: List<MovieDetalle>) {
         recommendations = newRecommendation
         notifyDataSetChanged()
     }

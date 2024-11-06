@@ -7,8 +7,13 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.katas.data.model.local.AppDatabase
+import com.example.katas.data.model.local.entity.User
+import kotlinx.coroutines.launch
 
 class Registro : AppCompatActivity() {
     lateinit var inputNombre: EditText
@@ -44,13 +49,41 @@ class Registro : AppCompatActivity() {
         inputContrasena.addTextChangedListener(textWatcher)
 
         buttonAceptarRegistro.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+
+            registerUser()
         }
         btnRegresarLogin.setOnClickListener{
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
+    }
+
+
+    fun registerUser(){
+        val nombre = inputNombre.text.toString()
+        val correo = inputCorreo.text.toString()
+        val contrasena = inputContrasena.text.toString()
+
+
+        if(nombre.isEmpty() || correo.isEmpty() || contrasena.isEmpty()){
+            Toast.makeText(this,"por favor complete todo los campos ",Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val user = User(name = nombre, email = correo, password = contrasena)
+
+        // insertamos el usuario en la bd con corutinas
+        lifecycleScope.launch {
+            val db = AppDatabase.getDatabase(applicationContext)
+            db.userDao().registeruser(user)
+            Toast.makeText(this@Registro, "Usuario regsitrado con exito",Toast.LENGTH_SHORT).show()
+            // Redirgir al usuario al login despues de registrarse
+            val intent = Intent(this@Registro, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
     }
 
     fun validateInputs() {

@@ -8,7 +8,7 @@ data class MoviesResponseSearch(
 )
 
 data class MovieSearch(
-
+    @SerializedName("title")
     val title: String?,
     @SerializedName("release_date")
     val releaseDate: String?,

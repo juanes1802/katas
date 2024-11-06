@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.katas.R
 import com.example.katas.data.model.MovieSearch
 
-class MoviesAdapterSearch(private var moviesList: List<MovieSearch>,private val clickListener: (MovieSearch)->Unit) :
+class MoviesAdapterSearch(private val clickListener: (MovieSearch)->Unit) :
     RecyclerView.Adapter<MoviesViewHolderSearch>() {
+    private var moviesList: List<MovieSearch> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolderSearch {
         val layoutInflater = LayoutInflater.from(parent.context)
         return MoviesViewHolderSearch(layoutInflater.inflate(R.layout.view_movies, parent, false),clickListener)

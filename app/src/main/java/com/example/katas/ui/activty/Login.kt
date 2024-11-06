@@ -4,11 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.katas.data.model.local.AppDatabase
+import kotlinx.coroutines.launch
 
 class Login : AppCompatActivity() {
     private lateinit var editTextUsuario: EditText
@@ -47,8 +52,7 @@ class Login : AppCompatActivity() {
         editTextContrasena.addTextChangedListener(textWatcher)
 
         ButtonLogin.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            loginUser()
         }
 
         LabelInvitado.setOnClickListener{
@@ -62,6 +66,36 @@ class Login : AppCompatActivity() {
         }
 
 
+    }
+
+    fun loginUser(){
+        val email = editTextUsuario.text.toString()
+        val password = editTextContrasena.text.toString()
+        //verificar que los campos no  esten vacios
+        if(email.isEmpty() || password.isEmpty()){
+            Toast.makeText(this,"Por favro, completa todos los campos ",Toast.LENGTH_SHORT).show()
+        }
+
+        //verificar las credenciales de la bd
+        lifecycleScope.launch {
+            val db = AppDatabase.getDatabase(applicationContext)
+            val user = db.userDao().loginUser(email,password)
+            if(user!= null){
+                //inicio de sesion exitoso
+                val welcomeMessage = "Binevenido, ${user.name}"
+
+                Toast.makeText(this@Login,welcomeMessage,Toast.LENGTH_SHORT).show()
+
+                Log.d("Login",welcomeMessage)
+
+
+                val intent = Intent(this@Login,MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else {
+                Toast.makeText(this@Login,"Credenciales incorrectas. Intenta de nuevo ",Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     fun validateInputs() {

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.katas.R
-import com.example.katas.databinding.FragmentPerfilBinding
 import com.example.katas.databinding.FragmentPlayBinding
 
 
