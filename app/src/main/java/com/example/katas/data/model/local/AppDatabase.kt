@@ -9,7 +9,7 @@ import com.example.katas.data.model.local.dao.UserDao
 import com.example.katas.data.model.local.entity.MovieEntity
 import com.example.katas.data.model.local.entity.User
 
-@Database(entities = [User::class], [MovieEntity::class], version = 1)
+@Database(entities = [User::class, MovieEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract  fun MovieDao(): MovieDao

@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
      @PrimaryKey(autoGenerate = true) val id: Int = 0,
      val name:String,
      val email: String,
-     val password: String
+     val password: String //encriptar la contrasena
 
  )
 

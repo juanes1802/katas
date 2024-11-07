@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.katas.data.model.MovieTopRatedAndPopular
 import com.example.katas.data.model.local.AppDatabase
+import com.example.katas.data.model.local.dao.MovieDao
 import com.example.katas.data.model.local.entity.MovieEntity
 import com.example.katas.data.network.ApiInterfaceTopRatingAndPopular
 import com.example.katas.service.ApiService
@@ -14,13 +15,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MoviesViewModel(private  val context: Context) : ViewModel() {
+class MoviesViewModel(private  val movieDao: MovieDao) : ViewModel() {
 
     private var _moviesRated = MutableLiveData<List<MovieTopRatedAndPopular>>()
     val moviesRated: LiveData<List<MovieTopRatedAndPopular>> = _moviesRated
     private var _moviesPopular = MutableLiveData<List<MovieTopRatedAndPopular>>()
     var moviesPopular: LiveData<List<MovieTopRatedAndPopular>> = _moviesPopular
-    private val movieDao = AppDatabase.getDatabase(context).MovieDao()
+
 
 
     fun loadMoviesRated() {
@@ -76,6 +77,30 @@ class MoviesViewModel(private  val context: Context) : ViewModel() {
         }
         movieDao.movieInsertAll(moviesToSave)
 
+    }
+
+    fun loadMoviesFromRoom(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val moviesFromRoom = movieDao.getAllMovies()
+            withContext(Dispatchers.Main){
+                _moviesRated.value = moviesFromRoom.map {entity ->
+                    MovieTopRatedAndPopular(
+                        id = entity.id,
+                        title = entity.title,
+                        rating = entity.rating,
+                        posterPath = entity.posterPath
+                    )
+                }
+                _moviesPopular.value = moviesFromRoom.map {entity ->
+                    MovieTopRatedAndPopular(
+                        id = entity.id,
+                        title = entity.title,
+                        rating = entity.rating,
+                        posterPath = entity.posterPath
+                    )
+                }
+            }
+        }
     }
 
 
