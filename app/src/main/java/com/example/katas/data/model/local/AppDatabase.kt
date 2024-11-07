@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.katas.data.model.local.dao.MovieDao
 import com.example.katas.data.model.local.dao.UserDao
+import com.example.katas.data.model.local.entity.MovieEntity
 import com.example.katas.data.model.local.entity.User
 
-@Database(entities = [User::class], version = 1)
+@Database(entities = [User::class], [MovieEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract  fun MovieDao(): MovieDao
 
 
     companion object {

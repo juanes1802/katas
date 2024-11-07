@@ -75,7 +75,7 @@ class Registro : AppCompatActivity() {
         // insertamos el usuario en la bd con corutinas
         lifecycleScope.launch {
             val db = AppDatabase.getDatabase(applicationContext)
-            db.userDao().registeruser(user)
+            db.userDao().registerUser(user)
             Toast.makeText(this@Registro, "Usuario regsitrado con exito",Toast.LENGTH_SHORT).show()
             // Redirgir al usuario al login despues de registrarse
             val intent = Intent(this@Registro, Login::class.java)

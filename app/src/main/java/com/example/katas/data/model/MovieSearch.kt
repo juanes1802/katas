@@ -26,6 +26,7 @@ data class MoviesResponseTopRatedAndPopular(
 
 
 data class MovieTopRatedAndPopular(
+    val id: Int,
     val title: String?,
     @SerializedName("vote_average")
     val rating: String?,

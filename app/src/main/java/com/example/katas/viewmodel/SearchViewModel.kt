@@ -40,6 +40,7 @@ class SearchViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
+                Log.e("SearchViewModel", "Error loading movies", e)
 
 
             }
