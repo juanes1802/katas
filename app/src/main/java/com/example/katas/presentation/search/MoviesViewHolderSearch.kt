@@ -1,7 +1,6 @@
-package com.example.katas.adapter
+package com.example.katas.presentation.search
 
 import android.view.View
-import android.view.View.OnClickListener
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 

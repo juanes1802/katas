@@ -1,7 +1,6 @@
-package com.example.katas.adapter
+package com.example.katas.presentation.search
 
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 

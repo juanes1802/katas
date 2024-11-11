@@ -1,11 +1,9 @@
-package com.example.katas.viewmodel
+package com.example.katas.presentation.home
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.katas.data.model.MovieTopRatedAndPopular
-import com.example.katas.data.model.local.AppDatabase
 import com.example.katas.data.model.local.dao.MovieDao
 import com.example.katas.data.model.local.entity.MovieEntity
 import com.example.katas.data.network.ApiInterfaceTopRatingAndPopular

@@ -1,4 +1,4 @@
-package com.example.katas.ui.adapter
+package com.example.katas.presentation.search.detail
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

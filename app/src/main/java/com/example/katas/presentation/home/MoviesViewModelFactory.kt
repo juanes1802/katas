@@ -1,4 +1,4 @@
-package com.example.katas.viewmodel
+package com.example.katas.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

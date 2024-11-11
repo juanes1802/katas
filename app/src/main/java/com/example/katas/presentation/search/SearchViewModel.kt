@@ -1,4 +1,4 @@
-package com.example.katas.viewmodel
+package com.example.katas.presentation.search
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,7 +10,6 @@ import com.example.katas.service.ApiService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.Locale
 
 class SearchViewModel : ViewModel() {

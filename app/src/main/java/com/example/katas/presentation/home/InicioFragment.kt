@@ -1,6 +1,4 @@
-package com.example.katas.ui.fragments
-
-import MoviesAdapterTopRatedAndPopular
+package com.example.katas.presentation.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,8 +11,6 @@ import com.example.katas.R
 import com.example.katas.data.model.MovieTopRatedAndPopular
 import com.example.katas.data.model.local.AppDatabase
 import com.example.katas.databinding.FragmentInicioBinding
-import com.example.katas.viewmodel.MoviesViewModel
-import com.example.katas.viewmodel.MoviesViewModelFactory
 
 class InicioFragment : Fragment(R.layout.fragment_inicio) {
     private var _binding: FragmentInicioBinding? = null

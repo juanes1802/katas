@@ -1,6 +1,5 @@
-package com.example.katas.ui.fragments
+package com.example.katas.presentation.search.detail
 
-import DetalleViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import com.example.katas.R
 import com.example.katas.data.model.MovieDetalle
 import com.example.katas.databinding.FragmentDetalleBinding
 import com.example.katas.service.ApiService.Companion.IMAGE_URL
-import com.example.katas.ui.adapter.MoviesAdapterDetail
 
 
 class DetalleFragment : Fragment(R.layout.fragment_detalle) {

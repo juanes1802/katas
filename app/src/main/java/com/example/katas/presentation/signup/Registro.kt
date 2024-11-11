@@ -1,4 +1,4 @@
-package com.example.katas
+package com.example.katas.presentation.signup
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,8 +11,10 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.katas.R
 import com.example.katas.data.model.local.AppDatabase
 import com.example.katas.data.model.local.entity.User
+import com.example.katas.presentation.login.Login
 import kotlinx.coroutines.launch
 
 class Registro : AppCompatActivity() {

@@ -1,3 +1,5 @@
+package com.example.katas.presentation.home
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +11,13 @@ class MoviesAdapterTopRatedAndPopular(private val MoviesList2: List<MovieTopRate
     RecyclerView.Adapter<MoviesViewHolderTopRatedAndPopular>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolderTopRatedAndPopular {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return MoviesViewHolderTopRatedAndPopular(layoutInflater.inflate(R.layout.items_movies_inicio, parent, false))
+        return MoviesViewHolderTopRatedAndPopular(
+            layoutInflater.inflate(
+                R.layout.items_movies_inicio,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int = MoviesList2.size

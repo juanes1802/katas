@@ -1,4 +1,4 @@
-package com.example.katas
+package com.example.katas.presentation.search
 
 import android.os.Bundle
 import android.util.Log
@@ -12,10 +12,9 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.katas.adapter.MoviesAdapterSearch
+import com.example.katas.R
 import com.example.katas.data.model.MovieSearch
 import com.example.katas.databinding.FragmentMoviesBinding
-import com.example.katas.viewmodel.SearchViewModel
 
 
 class BuscarFragment : Fragment(R.layout.fragment_movies) {

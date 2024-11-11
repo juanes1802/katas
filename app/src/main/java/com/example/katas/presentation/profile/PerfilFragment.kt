@@ -1,4 +1,4 @@
-package com.example.katas.ui.fragments
+package com.example.katas.presentation.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

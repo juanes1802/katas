@@ -1,4 +1,4 @@
-package com.example.katas
+package com.example.katas.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,9 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.katas.presentation.MainActivity
+import com.example.katas.R
+import com.example.katas.presentation.signup.Registro
 import com.example.katas.data.model.local.AppDatabase
 import kotlinx.coroutines.launch
 
@@ -89,7 +92,7 @@ class Login : AppCompatActivity() {
                 Log.d("Login",welcomeMessage)
 
 
-                val intent = Intent(this@Login,MainActivity::class.java)
+                val intent = Intent(this@Login, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }else {
@@ -104,7 +107,9 @@ class Login : AppCompatActivity() {
 
         ButtonLogin.isEnabled = usuario.isNotEmpty() && contrasena.isNotEmpty()
 
-        ButtonLogin.setBackgroundColor(if (ButtonLogin.isEnabled)getColor(R.color.blackButton ) else getColor(R.color.grayButtonAndText))
+        ButtonLogin.setBackgroundColor(if (ButtonLogin.isEnabled)getColor(R.color.blackButton) else getColor(
+            R.color.grayButtonAndText
+        ))
 
 
     }

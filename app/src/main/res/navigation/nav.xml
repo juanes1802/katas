@@ -6,7 +6,7 @@
     android:id="@+id/nav">
     <fragment
         android:id="@+id/page_inicio"
-        android:name="com.example.katas.ui.fragments.InicioFragment"
+        android:name="com.example.katas.presentation.home.InicioFragment"
         tools:layout="@layout/fragment_inicio">
         <action
             android:id="@+id/action_page_inicio_to_page_buscar"
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/page_buscar"
-        android:name= "com.example.katas.BuscarFragment"
+        android:name= "com.example.katas.presentation.search.BuscarFragment"
         tools:layout="@layout/fragment_movies">
         <action
             android:id="@+id/action_page_buscar_to_page_inicio"
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/detalleFragment"
-        android:name="com.example.katas.ui.fragments.DetalleFragment"
+        android:name="com.example.katas.presentation.search.detail.DetalleFragment"
         tools:layout="@layout/fragment_detalle"
 
         >
@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/page_play"
-        android:name="com.example.katas.ui.fragments.PlayFragment"
+        android:name="com.example.katas.presentation.play.PlayFragment"
         tools:layout="@layout/fragment_play">
     <action
         android:id="@+id/action_page_play_to_page_inicio"
@@ -76,7 +76,7 @@
 
     <fragment
         android:id="@+id/page_perfil"
-        android:name="com.example.katas.ui.fragments.PerfilFragment"
+        android:name="com.example.katas.presentation.profile.PerfilFragment"
         tools:layout="@layout/fragment_perfil"
         >
         <action

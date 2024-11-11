@@ -1,3 +1,5 @@
+package com.example.katas.presentation.home
+
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
