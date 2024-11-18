@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.katas.R
-import com.example.katas.data.model.MovieTopRatedAndPopular
+import com.example.katas.data.model.entities.MovieTopRatedAndPopularDto
 import com.example.katas.data.model.local.AppDatabase
 import com.example.katas.databinding.FragmentInicioBinding
 
@@ -53,7 +53,7 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
 
 
 
-    private fun initPopularRecyclerView(movieList: List<MovieTopRatedAndPopular>) {
+    private fun initPopularRecyclerView(movieList: List<MovieTopRatedAndPopularDto>) {
 
         val manager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewPopular.layoutManager = manager
@@ -63,7 +63,7 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
     }
 
 
-    fun initRatingRecyclerView(movieList: List<MovieTopRatedAndPopular>) {
+    fun initRatingRecyclerView(movieList: List<MovieTopRatedAndPopularDto>) {
 
         val manager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewRating.layoutManager = manager

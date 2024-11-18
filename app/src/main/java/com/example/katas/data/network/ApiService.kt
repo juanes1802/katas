@@ -1,7 +1,8 @@
-package com.example.katas.service
+package com.example.katas.data.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class ApiService {
     companion object {
@@ -21,10 +22,3 @@ class ApiService {
 
     }
 }
-
-
-
-
-
-
-

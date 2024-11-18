@@ -10,11 +10,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.katas.R
-import com.example.katas.data.model.MovieDetalle
+import com.example.katas.data.network.ApiService.Companion.IMAGE_URL
 import com.example.katas.databinding.FragmentDetalleBinding
-import com.example.katas.service.ApiService.Companion.IMAGE_URL
+import com.example.katas.domain.model.MovieDetalle
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetalleFragment : Fragment(R.layout.fragment_detalle) {
     private lateinit var adapter: MoviesAdapterDetail
     private var _binding: FragmentDetalleBinding? = null
@@ -43,7 +44,9 @@ class DetalleFragment : Fragment(R.layout.fragment_detalle) {
         InitRecyclerView()
 
         viewModel.recommendations.observe(viewLifecycleOwner) { recommendations ->
+
             adapter.updateList(recommendations)
+
         }
 
         viewModel.movieDetails.observe(viewLifecycleOwner) { movieDetail ->
@@ -59,7 +62,7 @@ class DetalleFragment : Fragment(R.layout.fragment_detalle) {
 
     }
 
-    private fun renderDetails(movieDetail: MovieDetalle) {
+    private fun renderDetails(movieDetail: MovieDetalle?) {
         movieDetail?.let {
             binding.textTitleOriginal.text = movieDetail.originalTitle
             binding.textTitleDetalle.text = movieDetail.title

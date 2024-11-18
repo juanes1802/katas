@@ -4,22 +4,22 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.katas.data.model.MovieSearch
+import com.example.katas.data.model.entities.MovieSearchDto
+import com.example.katas.data.network.ApiService
 import com.example.katas.service.ApiInterfaceBuscar
-import com.example.katas.service.ApiService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
 
 class SearchViewModel : ViewModel() {
-    private val _movies = MutableLiveData<List<MovieSearch>>()
-    val movies: LiveData<List<MovieSearch>> = _movies
+    private val _movies = MutableLiveData<List<MovieSearchDto>>()
+    val movies: LiveData<List<MovieSearchDto>> = _movies
 
-    private var _filteredMovies = MutableLiveData<List<MovieSearch>>()
+    private var _filteredMovies = MutableLiveData<List<MovieSearchDto>>()
 
-    val filteredMovies: LiveData<List<MovieSearch>> = _filteredMovies
-    private var originalMovieList: List<MovieSearch> = emptyList()
+    val filteredMovies: LiveData<List<MovieSearchDto>> = _filteredMovies
+    private var originalMovieList: List<MovieSearchDto> = emptyList()
 
     fun loadMovies() {
         CoroutineScope(Dispatchers.IO).launch {

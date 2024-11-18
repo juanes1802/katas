@@ -3,11 +3,11 @@ package com.example.katas.presentation.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.katas.data.model.MovieTopRatedAndPopular
+import com.example.katas.data.model.entities.MovieTopRatedAndPopularDto
 import com.example.katas.data.model.local.dao.MovieDao
 import com.example.katas.data.model.local.entity.MovieEntity
 import com.example.katas.data.network.ApiInterfaceTopRatingAndPopular
-import com.example.katas.service.ApiService
+import com.example.katas.data.network.ApiService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,10 +15,10 @@ import kotlinx.coroutines.withContext
 
 class MoviesViewModel(private  val movieDao: MovieDao) : ViewModel() {
 
-    private var _moviesRated = MutableLiveData<List<MovieTopRatedAndPopular>>()
-    val moviesRated: LiveData<List<MovieTopRatedAndPopular>> = _moviesRated
-    private var _moviesPopular = MutableLiveData<List<MovieTopRatedAndPopular>>()
-    var moviesPopular: LiveData<List<MovieTopRatedAndPopular>> = _moviesPopular
+    private var _moviesRated = MutableLiveData<List<MovieTopRatedAndPopularDto>>()
+    val moviesRated: LiveData<List<MovieTopRatedAndPopularDto>> = _moviesRated
+    private var _moviesPopular = MutableLiveData<List<MovieTopRatedAndPopularDto>>()
+    var moviesPopular: LiveData<List<MovieTopRatedAndPopularDto>> = _moviesPopular
 
 
 
@@ -62,7 +62,7 @@ class MoviesViewModel(private  val movieDao: MovieDao) : ViewModel() {
         }
     }
 
-    private suspend fun saveMoviesToRoom(movies: List<MovieTopRatedAndPopular>){
+    private suspend fun saveMoviesToRoom(movies: List<MovieTopRatedAndPopularDto>){
 
         val moviesToSave = movies.map {  movie ->
             MovieEntity(
@@ -82,7 +82,7 @@ class MoviesViewModel(private  val movieDao: MovieDao) : ViewModel() {
             val moviesFromRoom = movieDao.getAllMovies()
             withContext(Dispatchers.Main){
                 _moviesRated.value = moviesFromRoom.map {entity ->
-                    MovieTopRatedAndPopular(
+                    MovieTopRatedAndPopularDto(
                         id = entity.id,
                         title = entity.title,
                         rating = entity.rating,
@@ -90,7 +90,7 @@ class MoviesViewModel(private  val movieDao: MovieDao) : ViewModel() {
                     )
                 }
                 _moviesPopular.value = moviesFromRoom.map {entity ->
-                    MovieTopRatedAndPopular(
+                    MovieTopRatedAndPopularDto(
                         id = entity.id,
                         title = entity.title,
                         rating = entity.rating,

@@ -2,7 +2,7 @@ package com.example.katas.service
 
 
 
-import com.example.katas.data.model.MoviesResponseSearch
+import com.example.katas.data.model.remote.responses.MoviesResponseSearch
 import retrofit2.Response
 import retrofit2.http.GET
 

@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.katas.R
-import com.example.katas.data.model.MovieSearch
+import com.example.katas.data.model.entities.MovieSearchDto
 import com.example.katas.databinding.FragmentMoviesBinding
 
 
@@ -78,7 +78,7 @@ class BuscarFragment : Fragment(R.layout.fragment_movies) {
     }
 
 
-    fun onMovieClick(movie: MovieSearch) {
+    fun onMovieClick(movie: MovieSearchDto) {
         movie.id?.let { movieId ->
             val action = BuscarFragmentDirections.actionPageBuscarToPageDetail(movieId)
             findNavController().navigate(action)

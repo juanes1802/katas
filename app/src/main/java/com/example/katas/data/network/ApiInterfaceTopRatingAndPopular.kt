@@ -1,6 +1,6 @@
 package com.example.katas.data.network
 
-import com.example.katas.data.model.MoviesResponseTopRatedAndPopular
+import com.example.katas.data.model.remote.responses.MoviesResponseTopRatedAndPopular
 import retrofit2.Response
 import retrofit2.http.GET
 
