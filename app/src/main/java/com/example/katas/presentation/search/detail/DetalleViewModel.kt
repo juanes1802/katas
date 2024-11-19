@@ -10,6 +10,7 @@ import com.example.katas.data.network.ApiInterfaceDetalle
 import com.example.katas.data.network.ApiService
 import com.example.katas.domain.model.MovieDetalle
 import com.example.katas.domain.usecase.GetMovieDetailUseCase
+import com.example.katas.domain.usecase.GetMovieRecomendationsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -19,50 +20,33 @@ import javax.inject.Inject
 @HiltViewModel
 class DetalleViewModel @Inject constructor(
     private val getMovieDetailUseCase: GetMovieDetailUseCase,
-    private val apiService: ApiInterfaceDetalle
+    private val apiService: ApiInterfaceDetalle,
+    private val getMovieRecomendationsUseCase: GetMovieRecomendationsUseCase
 ) : ViewModel() {
 
-    private val _recommendations = MutableLiveData<List<MovieDetalleDto>>()
-    val recommendations: LiveData<List<MovieDetalleDto>> get() = _recommendations
+    private val _recommendations = MutableLiveData<List<MovieDetalle>>()
+    val recommendations: LiveData<List<MovieDetalle>> get() = _recommendations
     private val _movieDetails = MutableLiveData<MovieDetalle?>()
     val movieDetails: LiveData<MovieDetalle?> get() = _movieDetails
 
     fun fetchRecommendations(movieId: Int) {
         viewModelScope.launch {
             try {
-                val response = apiService.getMovieRecomendations(movieId)
-                if (response.isSuccessful) {
-                    val results = response.body()?.results ?: emptyList()
-                    Log.d(
-                        "com.example.katas.presentation.search.detail.DetalleViewModel",
-                        "Recomendaciones obtenidas: $results"
-                    )
-                    _recommendations.postValue(results)
-                } else {
-                    Log.e(
-                        "com.example.katas.presentation.search.detail.DetalleViewModel",
-                        "Error en la respuesta: ${response.code()} - ${response.message()}"
-                    )
-                }
+                val recommendationsList = getMovieRecomendationsUseCase.execute(movieId)
+
+                Log.d("DetalleViewModel", "Recomendaciones obtenidas: $recommendationsList")
+                _recommendations.postValue(recommendationsList)
             } catch (e: IOException) {
-                Log.e(
-                    "com.example.katas.presentation.search.detail.DetalleViewModel",
-                    "Error de red: ${e.message}"
-                )
+
+                Log.e("DetalleViewModel", "Error de red: ${e.message}")
+
             } catch (e: HttpException) {
-                Log.e(
-                    "com.example.katas.presentation.search.detail.DetalleViewModel",
-                    "Error HTTP: ${e.message()}"
-                )
+                Log.e("DetalleViewModel", "Error HTTP: ${e.message()}")
             } catch (e: Exception) {
-                Log.e(
-                    "com.example.katas.presentation.search.detail.DetalleViewModel",
-                    "Error desconocido: ${e.message}"
-                )
+                Log.e("DetalleViewModel", "Error desconocido: ${e.message}")
             }
         }
     }
-
     fun fetchMovieDetails(movieId: Int) {
         viewModelScope.launch {
             try {

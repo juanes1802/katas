@@ -5,6 +5,8 @@ import com.example.katas.data.repository.MovieRepositoryImpl
 import com.example.katas.domain.repository.MovieRepository
 import com.example.katas.domain.usecase.GetMovieDetailUseCase
 import com.example.katas.domain.usecase.GetMovieDetailUseCaseImpl
+import com.example.katas.domain.usecase.GetMovieRecomendationsUseCase
+import com.example.katas.domain.usecase.GetMovieRecomendationsUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,5 +22,8 @@ import retrofit2.Retrofit
 
      @Binds
      abstract  fun bindGetMovieDetailUsecase(impl: GetMovieDetailUseCaseImpl):GetMovieDetailUseCase
+
+     @Binds
+     abstract fun bindGetMovieRecomendationsUsecase(impl: GetMovieRecomendationsUseCaseImpl):GetMovieRecomendationsUseCase
 
 }

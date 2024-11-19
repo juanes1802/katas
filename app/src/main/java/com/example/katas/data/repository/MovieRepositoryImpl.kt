@@ -32,6 +32,26 @@ class MovieRepositoryImpl @Inject constructor(private val apiService: ApiInterfa
         }
     }
 
+    override suspend fun getMovieRecomendations(movieId: Int): List<MovieDetalle> {
+        return try {
+            val response = apiService.getMovieRecomendations(movieId)
+            if (response.isSuccessful) {
+                response.body()?.toDomainModelList()!!
+            } else {
+                Log.e(
+                    "MovieRepository",
+                    "Error en la respuesta: ${response.code()} - ${response.message()}"
+                )
+
+                emptyList()
+            }
+
+        } catch (e: Exception) {
+            Log.e("MovieRepository", "Error desconocido: ${e.message}")
+            throw Exception("Error desconocido: ${e.message}")
+        }
+    }
+
 
 }
 

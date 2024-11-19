@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.katas.R
 import com.example.katas.data.model.entities.MovieDetalleDto
+import com.example.katas.domain.model.MovieDetalle
 
 class MoviesAdapterDetail(
-    private var recommendations: List<MovieDetalleDto>
+    private var recommendations: List<MovieDetalle>
 ) : RecyclerView.Adapter<MoviesViewHolderDetail>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolderDetail {
@@ -22,8 +23,11 @@ class MoviesAdapterDetail(
 
     override fun getItemCount(): Int = recommendations.size
 
-    fun updateList(newRecommendation: List<MovieDetalleDto>) {
-        recommendations = newRecommendation
+    fun updateList(newRecommendation: List<MovieDetalle>) {
+        recommendations = newRecommendation.ifEmpty {
+            emptyList()
+
+        }
         notifyDataSetChanged()
     }
 }

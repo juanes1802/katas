@@ -6,4 +6,5 @@ import com.example.katas.domain.model.MovieDetalle
 
 interface MovieRepository {
     suspend fun getMovieDetails(movieId: Int): MovieDetalle?
+    suspend fun getMovieRecomendations(movieId: Int): List<MovieDetalle>
 }

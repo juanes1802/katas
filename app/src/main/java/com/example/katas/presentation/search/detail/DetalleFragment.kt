@@ -44,9 +44,9 @@ class DetalleFragment : Fragment(R.layout.fragment_detalle) {
         InitRecyclerView()
 
         viewModel.recommendations.observe(viewLifecycleOwner) { recommendations ->
-
+            recommendations?.let {
             adapter.updateList(recommendations)
-
+            } ?: run { adapter.updateList(emptyList()) }
         }
 
         viewModel.movieDetails.observe(viewLifecycleOwner) { movieDetail ->
