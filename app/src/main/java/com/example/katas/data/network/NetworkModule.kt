@@ -20,9 +20,15 @@ object NetworkModule {
 
     @Provides
     @Singleton
-
-    fun ProvideApiInterface(retrofit: Retrofit):ApiInterfaceDetalle{
+   // funcion de apiInterface para detalle
+    fun ProvideApiInterfaceDetalle(retrofit: Retrofit):ApiInterfaceDetalle{
         return  retrofit.create(ApiInterfaceDetalle::class.java)
+    }
+    // funcion de apiInterface para buscar
+    @Provides
+    @Singleton
+    fun ProvideApiInterfaceBuscar(retrofit: Retrofit): ApiInterfaceBuscar {
+        return  retrofit.create(ApiInterfaceBuscar::class.java)
     }
     @Provides
     @Singleton

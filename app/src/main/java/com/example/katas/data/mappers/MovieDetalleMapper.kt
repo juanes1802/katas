@@ -21,6 +21,7 @@ fun DataMovieDetalle.toDomainModel():DomainMovieDetalle{
 fun List<DataMovieDetalle>.toDomainModelList(): List<DomainMovieDetalle>{
     return  this.map { it.toDomainModel() }
 }
+// Mapper para convertir MoviesResponseDetalle a una lista de DomainMovieDetalle
 fun MoviesResponseDetalle.toDomainModelList():  List<DomainMovieDetalle>{
     return  results.toDomainModelList()
 }

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        tools:context=".presentation.search.detail.DetalleFragment">
+        tools:context=".presentation.search.detail.DetailFragment">
 
         <ImageButton
             android:id="@+id/btnatrasdetalle"
