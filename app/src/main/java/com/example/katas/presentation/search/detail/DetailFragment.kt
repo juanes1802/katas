@@ -11,23 +11,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.katas.R
 import com.example.katas.data.network.ApiService.Companion.IMAGE_URL
-import com.example.katas.databinding.FragmentDetalleBinding
+import com.example.katas.databinding.FragmentDetailBinding
+
 import com.example.katas.domain.model.MovieDetalle
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetalleFragment : Fragment(R.layout.fragment_detalle) {
+class DetailFragment : Fragment(R.layout.fragment_detail) {
     private lateinit var adapter: MoviesAdapterDetail
-    private var _binding: FragmentDetalleBinding? = null
+    private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetalleViewModel by viewModels()
-    private val args: DetalleFragmentArgs by navArgs()
+    private val args: DetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetalleBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 

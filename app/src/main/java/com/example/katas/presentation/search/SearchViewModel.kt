@@ -4,43 +4,35 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.katas.data.model.entities.MovieSearchDto
-import com.example.katas.data.network.ApiService
-import com.example.katas.service.ApiInterfaceBuscar
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import androidx.lifecycle.viewModelScope
+import com.example.katas.domain.model.MovieSearch
+import com.example.katas.domain.usecase.GetMovieSearchUseCase
+import com.example.katas.data.network.ApiInterfaceBuscar
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.Locale
+import javax.inject.Inject
+@HiltViewModel
+class SearchViewModel @Inject constructor(
+    private val getMovieSearchUseCase: GetMovieSearchUseCase,
+    private val apiService: ApiInterfaceBuscar
 
-class SearchViewModel : ViewModel() {
-    private val _movies = MutableLiveData<List<MovieSearchDto>>()
-    val movies: LiveData<List<MovieSearchDto>> = _movies
-
-    private var _filteredMovies = MutableLiveData<List<MovieSearchDto>>()
-
-    val filteredMovies: LiveData<List<MovieSearchDto>> = _filteredMovies
-    private var originalMovieList: List<MovieSearchDto> = emptyList()
+) : ViewModel() {
+    private val _movies = MutableLiveData<List<MovieSearch>>()
+    val movies: LiveData<List<MovieSearch>> = _movies
+    private var _filteredMovies = MutableLiveData<List<MovieSearch>>()
+    val filteredMovies: LiveData<List<MovieSearch>> = _filteredMovies
+    private var originalMovieList: List<MovieSearch> = emptyList()
 
     fun loadMovies() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val apiService = ApiService.getInstance().create(ApiInterfaceBuscar::class.java)
-            try {
-                val response = apiService.getMovies()
-                if (response.isSuccessful && response.body() != null) {
-                    val movieSearch = response.body()!!.results
-                    // withContext(Dispatchers.Main) {
-                    _movies.postValue(movieSearch)
-                    originalMovieList = movieSearch
-                    _filteredMovies.postValue(movieSearch)
-                    //}
-
-                } else {
-                    // siled class
-                }
-
-            } catch (e: Exception) {
-                Log.e("SearchViewModel", "Error loading movies", e)
-
+        viewModelScope.launch {
+            try{
+                val moviesList = getMovieSearchUseCase.execute()
+                _movies.value = moviesList
+                _filteredMovies.value = moviesList
+                originalMovieList = moviesList
+            }catch (e: Exception){
+                Log.e("SearchViewModel", "Error al cargar películas: ${e.message}")
 
             }
         }

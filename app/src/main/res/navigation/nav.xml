@@ -42,8 +42,8 @@
 
     <fragment
         android:id="@+id/detalleFragment"
-        android:name="com.example.katas.presentation.search.detail.DetalleFragment"
-        tools:layout="@layout/fragment_detalle"
+        android:name="com.example.katas.presentation.search.detail.DetailFragment"
+        tools:layout="@layout/fragment_detail"
 
         >
         <argument
