@@ -1,25 +1,35 @@
 package com.example.katas.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.katas.data.model.entities.MovieTopRatedAndPopularDto
 import com.example.katas.data.model.local.dao.MovieDao
 import com.example.katas.data.model.local.entity.MovieEntity
 import com.example.katas.data.network.ApiInterfaceTopRatingAndPopular
 import com.example.katas.data.network.ApiService
+import com.example.katas.domain.model.MovieHome
+import com.example.katas.domain.usecase.home.popular.GetMoviePopularUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
+@HiltViewModel
+class MoviesViewModel @Inject constructor(
 
-class MoviesViewModel(private  val movieDao: MovieDao) : ViewModel() {
+    private val getMoviePopularUseCase: GetMoviePopularUseCase
+) : ViewModel() {
 
     private var _moviesRated = MutableLiveData<List<MovieTopRatedAndPopularDto>>()
     val moviesRated: LiveData<List<MovieTopRatedAndPopularDto>> = _moviesRated
-    private var _moviesPopular = MutableLiveData<List<MovieTopRatedAndPopularDto>>()
-    var moviesPopular: LiveData<List<MovieTopRatedAndPopularDto>> = _moviesPopular
-
+    private var _moviesPopular = MutableLiveData<List<MovieHome>>()
+    var moviesPopular: LiveData<List<MovieHome>> = _moviesPopular
 
 
     fun loadMoviesRated() {
@@ -35,73 +45,36 @@ class MoviesViewModel(private  val movieDao: MovieDao) : ViewModel() {
                     }
 
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
             }
         }
     }
 
     fun loadMoviesPopular() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val apiService =
-                ApiService.getInstance().create(ApiInterfaceTopRatingAndPopular::class.java)
+        viewModelScope.launch {
+
             try {
-                val response = apiService.getPopularMovies()
-                if (response.isSuccessful && response.body() != null) {
-                    val moviePopular = response.body()!!.results
+                val moviesPopular = getMoviePopularUseCase.execute()
 
-                    // guardar en room
-                    saveMoviesToRoom(moviePopular)
-                    withContext(Dispatchers.Main) {
-                        _moviesPopular.value = moviePopular
-                    }
+                _moviesPopular.postValue(moviesPopular)
 
 
-                }
+            } catch (e: IOException) {
+                Log.e("MoviesViewModel", "Error de red al cargar las películas populares", e)
+            } catch (e: HttpException) {
+                Log.e("MoviesViewModel", "Error Http: ${e.message()} ")
             } catch (e: Exception) {
+                Log.e("MoviesViewModel", "Error desconocido: ${e.message}")
             }
-        }
-    }
 
-    private suspend fun saveMoviesToRoom(movies: List<MovieTopRatedAndPopularDto>){
 
-        val moviesToSave = movies.map {  movie ->
-            MovieEntity(
-                id = movie.id,
-                title = movie.title,
-                rating = movie.rating,
-                posterPath = movie.posterPath
-
-            )
-        }
-        movieDao.movieInsertAll(moviesToSave)
-
-    }
-
-    fun loadMoviesFromRoom(){
-        CoroutineScope(Dispatchers.IO).launch {
-            val moviesFromRoom = movieDao.getAllMovies()
-            withContext(Dispatchers.Main){
-                _moviesRated.value = moviesFromRoom.map {entity ->
-                    MovieTopRatedAndPopularDto(
-                        id = entity.id,
-                        title = entity.title,
-                        rating = entity.rating,
-                        posterPath = entity.posterPath
-                    )
-                }
-                _moviesPopular.value = moviesFromRoom.map {entity ->
-                    MovieTopRatedAndPopularDto(
-                        id = entity.id,
-                        title = entity.title,
-                        rating = entity.rating,
-                        posterPath = entity.posterPath
-                    )
-                }
-            }
         }
     }
 
 
 }
+
+
+
 
 

@@ -1,7 +1,6 @@
-package com.example.katas.domain.usecase
+package com.example.katas.domain.usecase.detail
 
 
-import com.example.katas.data.model.remote.responses.MoviesResponseDetalle
 import com.example.katas.domain.model.MovieDetalle
 
 

@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.katas.R
 
 import com.example.katas.data.model.entities.MovieTopRatedAndPopularDto
+import com.example.katas.domain.model.MovieHome
 
-class MoviesAdapterTopRatedAndPopular(private val MoviesList2: List<MovieTopRatedAndPopularDto>) :
+class MoviesAdapterTopRatedAndPopular(private val MoviesList2: List<MovieHome>) :
     RecyclerView.Adapter<MoviesViewHolderTopRatedAndPopular>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolderTopRatedAndPopular {
         val layoutInflater = LayoutInflater.from(parent.context)

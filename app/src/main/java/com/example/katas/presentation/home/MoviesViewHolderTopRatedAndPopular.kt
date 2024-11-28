@@ -6,11 +6,12 @@ import com.bumptech.glide.Glide
 import com.example.katas.data.model.entities.MovieTopRatedAndPopularDto
 import com.example.katas.data.network.ApiConstants
 import com.example.katas.databinding.ItemsMoviesInicioBinding
+import com.example.katas.domain.model.MovieHome
 
 class MoviesViewHolderTopRatedAndPopular(view: View): RecyclerView.ViewHolder(view){
     private val binding = ItemsMoviesInicioBinding.bind(view)
 
-    fun render(MoviesModel2: MovieTopRatedAndPopularDto) {
+    fun render(MoviesModel2: MovieHome) {
         binding.textTitleRating.text = MoviesModel2.title
         binding.textRating.text = MoviesModel2.rating
 

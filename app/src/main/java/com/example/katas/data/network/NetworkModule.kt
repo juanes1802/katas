@@ -30,6 +30,13 @@ object NetworkModule {
     fun ProvideApiInterfaceBuscar(retrofit: Retrofit): ApiInterfaceBuscar {
         return  retrofit.create(ApiInterfaceBuscar::class.java)
     }
+
+    // funcion de apiInterface para home
+    @Provides
+    @Singleton
+    fun ProvideApiInterfaceHome(retrofit: Retrofit): ApiInterfaceTopRatingAndPopular {
+        return  retrofit.create(ApiInterfaceTopRatingAndPopular::class.java)
+    }
     @Provides
     @Singleton
     fun provideIMageUrl(): String {

@@ -11,7 +11,10 @@ import com.example.katas.R
 import com.example.katas.data.model.entities.MovieTopRatedAndPopularDto
 import com.example.katas.data.model.local.AppDatabase
 import com.example.katas.databinding.FragmentInicioBinding
+import com.example.katas.domain.model.MovieHome
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InicioFragment : Fragment(R.layout.fragment_inicio) {
     private var _binding: FragmentInicioBinding? = null
     private val binding get() = _binding!!
@@ -20,7 +23,7 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentInicioBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -29,9 +32,9 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
         super.onViewCreated(view, savedInstanceState)
 
         val movieDao = AppDatabase.getDatabase(requireContext()).MovieDao()
-        val factory = MoviesViewModelFactory(movieDao)
 
-        moviesViewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
+
+
 
         moviesViewModel = ViewModelProvider(this)[MoviesViewModel::class.java]
 
@@ -39,10 +42,10 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
             moviesPopular -> initPopularRecyclerView(moviesPopular)
         }
 
-        moviesViewModel.moviesRated.observe(viewLifecycleOwner){
-            moviesRated -> initRatingRecyclerView(moviesRated)
-        }
-        moviesViewModel.loadMoviesFromRoom()
+//        moviesViewModel.moviesRated.observe(viewLifecycleOwner){
+//            moviesRated -> initRatingRecyclerView(moviesRated)
+//        }
+
         moviesViewModel.loadMoviesPopular()
         moviesViewModel.loadMoviesRated()
 
@@ -53,7 +56,7 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
 
 
 
-    private fun initPopularRecyclerView(movieList: List<MovieTopRatedAndPopularDto>) {
+    private fun initPopularRecyclerView(movieList: List<MovieHome>) {
 
         val manager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewPopular.layoutManager = manager
@@ -63,7 +66,7 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
     }
 
 
-    fun initRatingRecyclerView(movieList: List<MovieTopRatedAndPopularDto>) {
+    fun initRatingRecyclerView(movieList: List<MovieHome>) {
 
         val manager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewRating.layoutManager = manager
