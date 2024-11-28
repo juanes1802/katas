@@ -12,6 +12,8 @@ import com.example.katas.domain.usecase.detail.recomendations.GetMovieRecomendat
 import com.example.katas.domain.usecase.detail.recomendations.GetMovieRecomendationsUseCaseImpl
 import com.example.katas.domain.usecase.home.popular.GetMoviePopularUseCase
 import com.example.katas.domain.usecase.home.popular.GetMoviePopularUseCaseImpl
+import com.example.katas.domain.usecase.home.rated.GetMovieRatedUseCase
+import com.example.katas.domain.usecase.home.rated.GetMovieRatedUseCaseImpl
 import com.example.katas.domain.usecase.search.GetMovieSearchUseCase
 import com.example.katas.domain.usecase.search.GetMovieSearchUseCaseImpl
 import dagger.Binds
@@ -56,6 +58,10 @@ import dagger.hilt.components.SingletonComponent
      abstract fun bindGetMoviePopularUseCase(impl: GetMoviePopularUseCaseImpl): GetMoviePopularUseCase
 
      // aqui cerramos el modulo para el  peliculas populares
+
+     // aqui comenzamos con el modulo para el  peliculas mejores calificadas
+     @Binds
+     abstract fun bindGetMovieTopRatedUseCase(impl: GetMovieRatedUseCaseImpl): GetMovieRatedUseCase
 
 
 

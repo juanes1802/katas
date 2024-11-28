@@ -31,7 +31,7 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val movieDao = AppDatabase.getDatabase(requireContext()).MovieDao()
+
 
 
 
@@ -42,9 +42,9 @@ class InicioFragment : Fragment(R.layout.fragment_inicio) {
             moviesPopular -> initPopularRecyclerView(moviesPopular)
         }
 
-//        moviesViewModel.moviesRated.observe(viewLifecycleOwner){
-//            moviesRated -> initRatingRecyclerView(moviesRated)
-//        }
+      moviesViewModel.moviesRated.observe(viewLifecycleOwner){
+            moviesRated -> initRatingRecyclerView(moviesRated)
+        }
 
         moviesViewModel.loadMoviesPopular()
         moviesViewModel.loadMoviesRated()

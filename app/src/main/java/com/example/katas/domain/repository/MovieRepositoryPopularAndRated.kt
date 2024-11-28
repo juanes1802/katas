@@ -4,4 +4,5 @@ import com.example.katas.domain.model.MovieHome
 
 interface MovieRepositoryPopularAndRated {
     suspend fun  getPopularMovies(): List<MovieHome>
+    suspend fun  getRatedMovies(): List<MovieHome>
 }

@@ -22,4 +22,17 @@ class MovieRepositoryPopularAndRatedImpl @Inject constructor(private val apiServ
         }
     }
 
+    override suspend fun getRatedMovies(): List<MovieHome> {
+        return try {
+            val response = apiService.getTopRatedMovies()
+            if (response.isSuccessful) {
+                response.body()?.toDomainModelList()!!
+            }else {
+                throw Exception("Error en la respuesta: ${response.code()} - ${response.message()}")
+            }
+        }catch (e: Exception){
+            throw Exception("Error desconocido: ${e.message}")
+        }
+    }
+
 }
