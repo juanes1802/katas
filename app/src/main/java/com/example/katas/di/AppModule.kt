@@ -1,5 +1,8 @@
 package com.example.katas.di
 
+import android.content.Context
+import com.example.katas.data.model.local.AppDatabase
+import com.example.katas.data.model.local.dao.MovieDao
 import com.example.katas.data.repository.MovieRepositoryDetailsAndRecommendationsImpl
 import com.example.katas.data.repository.MovieRepositoryPopularAndRatedImpl
 import com.example.katas.data.repository.MovieRepositorySearchImpl
@@ -19,50 +22,51 @@ import com.example.katas.domain.usecase.search.GetMovieSearchUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
- abstract class AppModule {
-
-     // Binds para vincular la implementación a la interfaz abstracta (MovieRepository)
-     // comenzamos con el modulo para los detalles y las recomendaciones de la pelicula
-     @Binds
-     abstract  fun bindMovieRepositoryDetailsAndRecommendations(impl: MovieRepositoryDetailsAndRecommendationsImpl): MovieRepositoryDetailsAndRecommendations
-
-     @Binds
-     abstract  fun bindGetMovieDetailUsecase(impl: GetMovieDetailUseCaseImpl): GetMovieDetailUseCase
-
-     @Binds
-     abstract fun bindGetMovieRecomendationsUsecase(impl: GetMovieRecomendationsUseCaseImpl): GetMovieRecomendationsUseCase
-     // aqui cerramos el modulo para los detalles y las recomendaciones de la pelicula y sus implementaciones
-
-     // comenzamos con el modulo para buscar la pelicula
+abstract class AppModule {
 
 
-     @Binds
-     abstract  fun bindMovieRepositorySearch(impl: MovieRepositorySearchImpl): MovieRepositorySearch
+    // Binds para vincular la implementación a la interfaz abstracta (MovieRepository)
+    // comenzamos con el modulo para los detalles y las recomendaciones de la pelicula
+    @Binds
+    abstract fun bindMovieRepositoryDetailsAndRecommendations(impl: MovieRepositoryDetailsAndRecommendationsImpl): MovieRepositoryDetailsAndRecommendations
 
-     @Binds
-     abstract  fun bindGetMovieSearchUsecase(impl: GetMovieSearchUseCaseImpl): GetMovieSearchUseCase
+    @Binds
+    abstract fun bindGetMovieDetailUsecase(impl: GetMovieDetailUseCaseImpl): GetMovieDetailUseCase
 
-     // aqui cerramos el modulo para buscar la pelicula
+    @Binds
+    abstract fun bindGetMovieRecomendationsUsecase(impl: GetMovieRecomendationsUseCaseImpl): GetMovieRecomendationsUseCase
+    // aqui cerramos el modulo para los detalles y las recomendaciones de la pelicula y sus implementaciones
+
+    // comenzamos con el modulo para buscar la pelicula
 
 
-     // aqui comenzamos con el modulo para las pelicuals populares
+    @Binds
+    abstract fun bindMovieRepositorySearch(impl: MovieRepositorySearchImpl): MovieRepositorySearch
 
-     @Binds
-     abstract  fun bindMoviesRepositoryPopularAndRated(impl: MovieRepositoryPopularAndRatedImpl): MovieRepositoryPopularAndRated
+    @Binds
+    abstract fun bindGetMovieSearchUsecase(impl: GetMovieSearchUseCaseImpl): GetMovieSearchUseCase
 
-     @Binds
-     abstract fun bindGetMoviePopularUseCase(impl: GetMoviePopularUseCaseImpl): GetMoviePopularUseCase
+    // aqui cerramos el modulo para buscar la pelicula
 
-     // aqui cerramos el modulo para el  peliculas populares
 
-     // aqui comenzamos con el modulo para el  peliculas mejores calificadas
-     @Binds
-     abstract fun bindGetMovieTopRatedUseCase(impl: GetMovieRatedUseCaseImpl): GetMovieRatedUseCase
+    // aqui comenzamos con el modulo para las pelicuals populares
 
+    @Binds
+    abstract fun bindMoviesRepositoryPopularAndRated(impl: MovieRepositoryPopularAndRatedImpl): MovieRepositoryPopularAndRated
+
+    @Binds
+    abstract fun bindGetMoviePopularUseCase(impl: GetMoviePopularUseCaseImpl): GetMoviePopularUseCase
+
+    // aqui cerramos el modulo para el  peliculas populares
+
+    // aqui comenzamos con el modulo para el  peliculas mejores calificadas
+    @Binds
+    abstract fun bindGetMovieTopRatedUseCase(impl: GetMovieRatedUseCaseImpl): GetMovieRatedUseCase
 
 
 }
