@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.katas.ApplicationMain.Companion.prefs
 import com.example.katas.presentation.MainActivity
 import com.example.katas.R
 import com.example.katas.presentation.signup.Registro
@@ -29,6 +30,7 @@ class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        checkSession()
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
         editTextUsuario = findViewById(R.id.usuario_input)
@@ -84,6 +86,7 @@ class Login : AppCompatActivity() {
             val db = AppDatabase.getDatabase(applicationContext)
             val user = db.userDao().loginUser(email,password)
             if(user!= null){
+                prefs.saveName(user.email)
                 //inicio de sesion exitoso
                 val welcomeMessage = "Binevenido, ${user.name}"
 
@@ -112,5 +115,13 @@ class Login : AppCompatActivity() {
         ))
 
 
+    }
+    fun checkSession(){
+        val email = prefs.getName()
+        if(email.isNotEmpty()){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

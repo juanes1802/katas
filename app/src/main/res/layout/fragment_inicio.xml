@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:paddingBottom="70dp"
-    android:background="@color/white"
+    android:background="@color/black"
     tools:context=".presentation.home.InicioFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,7 +69,7 @@
             android:id="@+id/Separator"
             android:layout_width="match_parent"
             android:layout_height="15dp"
-            android:background="@color/gray_line"
+            android:background="@color/black"
             app:layout_constraintTop_toBottomOf="@id/ContenedorPrincipal" />
 
         <!-- Contenedor de RecyclerViews -->
@@ -110,12 +110,14 @@
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="4dp"
+                android:background="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/textRatingPopular">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewPopular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/black"
 
                     />
             </androidx.cardview.widget.CardView>
@@ -124,7 +126,8 @@
                 android:id="@+id/Separator_below"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:background="@color/gray_line"
+                android:background="@color/black"
+
                 app:layout_constraintTop_toBottomOf="@id/cardviewRecycler" />
 
             <ImageView
