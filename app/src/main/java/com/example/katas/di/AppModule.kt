@@ -3,6 +3,9 @@ package com.example.katas.di
 import android.content.Context
 import com.example.katas.data.model.local.AppDatabase
 import com.example.katas.data.model.local.dao.MovieDao
+import com.example.katas.data.network.ApiInterfaceBuscar
+import com.example.katas.data.network.ApiInterfaceDetalle
+import com.example.katas.data.network.ApiInterfaceTopRatingAndPopular
 import com.example.katas.data.repository.MovieRepositoryDetailsAndRecommendationsImpl
 import com.example.katas.data.repository.MovieRepositoryPopularAndRatedImpl
 import com.example.katas.data.repository.MovieRepositorySearchImpl
@@ -19,54 +22,61 @@ import com.example.katas.domain.usecase.home.rated.GetMovieRatedUseCase
 import com.example.katas.domain.usecase.home.rated.GetMovieRatedUseCaseImpl
 import com.example.katas.domain.usecase.search.GetMovieSearchUseCase
 import com.example.katas.domain.usecase.search.GetMovieSearchUseCaseImpl
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class AppModule {
+object AppModule {
 
+    // Proporcionar MovieRepositoryDetailsAndRecommendations
+    @Provides
+    fun provideMovieRepositoryDetailsAndRecommendations(apiService: ApiInterfaceDetalle): MovieRepositoryDetailsAndRecommendations {
+        return MovieRepositoryDetailsAndRecommendationsImpl(apiService)
+    }
 
-    // Binds para vincular la implementación a la interfaz abstracta (MovieRepository)
-    // comenzamos con el modulo para los detalles y las recomendaciones de la pelicula
-    @Binds
-    abstract fun bindMovieRepositoryDetailsAndRecommendations(impl: MovieRepositoryDetailsAndRecommendationsImpl): MovieRepositoryDetailsAndRecommendations
+    // Proporcionar GetMovieDetailUseCase
+    @Provides
+    fun provideGetMovieDetailUseCase(movieRepository: MovieRepositoryDetailsAndRecommendations): GetMovieDetailUseCase {
+        return GetMovieDetailUseCaseImpl(movieRepository)
+    }
 
-    @Binds
-    abstract fun bindGetMovieDetailUsecase(impl: GetMovieDetailUseCaseImpl): GetMovieDetailUseCase
+    // Proporcionar GetMovieRecomendationsUseCase
+    @Provides
+    fun provideGetMovieRecomendationsUseCase(movieRepository: MovieRepositoryDetailsAndRecommendations): GetMovieRecomendationsUseCase {
+        return GetMovieRecomendationsUseCaseImpl(movieRepository)
+    }
 
-    @Binds
-    abstract fun bindGetMovieRecomendationsUsecase(impl: GetMovieRecomendationsUseCaseImpl): GetMovieRecomendationsUseCase
-    // aqui cerramos el modulo para los detalles y las recomendaciones de la pelicula y sus implementaciones
+    // Proporcionar MovieRepositorySearch
+    @Provides
+    fun provideMovieRepositorySearch(apiService: ApiInterfaceBuscar): MovieRepositorySearch {
+        return MovieRepositorySearchImpl(apiService)
+    }
 
-    // comenzamos con el modulo para buscar la pelicula
+    // Proporcionar GetMovieSearchUseCase
+    @Provides
+    fun provideGetMovieSearchUseCase(movieRepository: MovieRepositorySearch): GetMovieSearchUseCase {
+        return GetMovieSearchUseCaseImpl(movieRepository)
+    }
 
+    // Proporcionar MovieRepositoryPopularAndRated
+    @Provides
+    fun provideMovieRepositoryPopularAndRated(apiService: ApiInterfaceTopRatingAndPopular,movieDao: MovieDao): MovieRepositoryPopularAndRated {
+        return MovieRepositoryPopularAndRatedImpl(apiService,movieDao)
+    }
 
-    @Binds
-    abstract fun bindMovieRepositorySearch(impl: MovieRepositorySearchImpl): MovieRepositorySearch
+    // Proporcionar GetMoviePopularUseCase
+    @Provides
+    fun provideGetMoviePopularUseCase(movieRepository: MovieRepositoryPopularAndRated): GetMoviePopularUseCase {
+        return GetMoviePopularUseCaseImpl(movieRepository)
+    }
 
-    @Binds
-    abstract fun bindGetMovieSearchUsecase(impl: GetMovieSearchUseCaseImpl): GetMovieSearchUseCase
-
-    // aqui cerramos el modulo para buscar la pelicula
-
-
-    // aqui comenzamos con el modulo para las pelicuals populares
-
-    @Binds
-    abstract fun bindMoviesRepositoryPopularAndRated(impl: MovieRepositoryPopularAndRatedImpl): MovieRepositoryPopularAndRated
-
-    @Binds
-    abstract fun bindGetMoviePopularUseCase(impl: GetMoviePopularUseCaseImpl): GetMoviePopularUseCase
-
-    // aqui cerramos el modulo para el  peliculas populares
-
-    // aqui comenzamos con el modulo para el  peliculas mejores calificadas
-    @Binds
-    abstract fun bindGetMovieTopRatedUseCase(impl: GetMovieRatedUseCaseImpl): GetMovieRatedUseCase
-
-
+    // Proporcionar GetMovieRatedUseCase
+    @Provides
+    fun provideGetMovieRatedUseCase(movieRepository: MovieRepositoryPopularAndRated): GetMovieRatedUseCase {
+        return GetMovieRatedUseCaseImpl(movieRepository)
+    }
 }

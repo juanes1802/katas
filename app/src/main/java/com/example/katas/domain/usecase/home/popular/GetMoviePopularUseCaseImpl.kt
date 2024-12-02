@@ -5,7 +5,7 @@ import com.example.katas.domain.model.MovieHome
 import com.example.katas.domain.repository.MovieRepositoryPopularAndRated
 import javax.inject.Inject
 
-class GetMoviePopularUseCaseImpl @Inject constructor(
+class GetMoviePopularUseCaseImpl (
     private val movieRepository: MovieRepositoryPopularAndRated
 
 ) : GetMoviePopularUseCase {
