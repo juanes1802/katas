@@ -4,6 +4,12 @@ import android.content.Context
 import androidx.room.Room
 import com.example.katas.data.model.local.AppDatabase
 import com.example.katas.data.model.local.dao.MovieDao
+import com.example.katas.data.model.local.dao.UserDao
+import com.example.katas.data.repository.LoginRepositoryImpl
+import com.example.katas.data.sharedpreference.Prefs
+import com.example.katas.domain.repository.LoginRepository
+import com.example.katas.domain.usecase.login.LoginUseCase
+import com.example.katas.domain.usecase.login.LoginUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +35,32 @@ object DataBaseModule {
     fun provideMovieDao(database: AppDatabase): MovieDao {
         return database.MovieDao()
 
+
+
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserDao(database: AppDatabase): UserDao {
+        return database.UserDao()
+    }
+    @Provides
+    @Singleton
+    fun providePrefs(@ApplicationContext context: Context): Prefs {
+        return Prefs(context)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideLoginRepository(userDao: UserDao,prefs: Prefs): LoginRepository {
+        return LoginRepositoryImpl(userDao,prefs)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLoginUseCase(loginRepository: LoginRepository): LoginUseCase {
+        return LoginUseCaseImpl(loginRepository)
     }
 
 }
