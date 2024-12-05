@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_page_inicio_to_page_perfil"
             app:destination="@id/page_perfil" />
+        <action
+            android:id="@+id/action_page_inicio_to_page_detail"
+            app:destination="@id/detalleFragment" />
 
     </fragment>
 
@@ -46,6 +49,10 @@
         tools:layout="@layout/fragment_detail"
 
         >
+        <action
+            android:id="@+id/action_page_recomendations_to_page_detail"
+            app:destination="@id/detalleFragment" />
+
         <argument
             android:name="movieId"
             app:argType="integer"

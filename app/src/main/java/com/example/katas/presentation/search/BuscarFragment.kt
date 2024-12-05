@@ -24,7 +24,7 @@ class BuscarFragment : Fragment(R.layout.fragment_movies) {
 
     private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!!
-    lateinit var  adapter : MoviesAdapterSearch
+    private lateinit var  adapter : MoviesAdapterSearch
     lateinit var searchViewModel: SearchViewModel
 
     override fun onCreateView(
@@ -86,7 +86,7 @@ class BuscarFragment : Fragment(R.layout.fragment_movies) {
             findNavController().navigate(action)
             Log.d("BuscarFragment", "Navegando a DetalleFragment con movieId: $movieId")
         } ?:run{
-            Toast.makeText(requireContext(), "hola", Toast.LENGTH_SHORT).show()
+            Log.d("HomeFragment ", "movieId es nulo")
 
 
         }

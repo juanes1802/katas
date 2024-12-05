@@ -7,13 +7,11 @@ import com.example.katas.R
 import com.example.katas.data.model.entities.MovieDetalleDto
 import com.example.katas.domain.model.MovieDetalle
 
-class MoviesAdapterDetail(
-    private var recommendations: List<MovieDetalle>
-) : RecyclerView.Adapter<MoviesViewHolderDetail>() {
-
+class MoviesAdapterDetail(private val clickListener: (MovieDetalle) -> Unit) : RecyclerView.Adapter<MoviesViewHolderDetail>() {
+    private var recommendations: List<MovieDetalle> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolderDetail {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return MoviesViewHolderDetail(layoutInflater.inflate(R.layout.items_movies_inicio, parent, false))
+        return MoviesViewHolderDetail(layoutInflater.inflate(R.layout.items_movies_inicio, parent, false),clickListener)
     }
 
     override fun onBindViewHolder(holder: MoviesViewHolderDetail, position: Int) {
@@ -24,10 +22,10 @@ class MoviesAdapterDetail(
     override fun getItemCount(): Int = recommendations.size
 
     fun updateList(newRecommendation: List<MovieDetalle>) {
-        recommendations = newRecommendation.ifEmpty {
-            emptyList()
+        recommendations = newRecommendation
+            notifyDataSetChanged()
 
-        }
-        notifyDataSetChanged()
+
+
     }
 }

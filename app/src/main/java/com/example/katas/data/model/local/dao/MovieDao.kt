@@ -15,7 +15,7 @@ interface MovieDao {
     @Query("SELECT * FROM movies_local")
     suspend fun   getAllMovies(): List<MovieEntity>
 
-    @Query("DELETE  FROM movies_local")
+    @Query("DELETE  FROM movies_local ")
     suspend fun  deleteAllMovies()
 
 }

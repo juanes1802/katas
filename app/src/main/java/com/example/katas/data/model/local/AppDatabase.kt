@@ -11,8 +11,8 @@ import com.example.katas.data.model.local.entity.User
 
 @Database(entities = [User::class, MovieEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun userDao(): UserDao
     abstract  fun MovieDao(): MovieDao
+    abstract fun UserDao(): UserDao
 
 
     companion object {

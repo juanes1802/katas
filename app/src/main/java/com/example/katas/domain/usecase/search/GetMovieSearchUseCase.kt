@@ -1,4 +1,4 @@
-package com.example.katas.domain.usecase
+package com.example.katas.domain.usecase.search
 
 import com.example.katas.domain.model.MovieSearch
 

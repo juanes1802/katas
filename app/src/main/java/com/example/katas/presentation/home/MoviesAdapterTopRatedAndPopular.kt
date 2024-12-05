@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.katas.R
 
-import com.example.katas.data.model.entities.MovieTopRatedAndPopularDto
+import com.example.katas.domain.model.MovieHome
 
-class MoviesAdapterTopRatedAndPopular(private val MoviesList2: List<MovieTopRatedAndPopularDto>) :
+class MoviesAdapterTopRatedAndPopular(private val clickListener: (MovieHome) -> Unit) :
     RecyclerView.Adapter<MoviesViewHolderTopRatedAndPopular>() {
+    private var moviesListRatedAndPopular: List<MovieHome> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolderTopRatedAndPopular {
         val layoutInflater = LayoutInflater.from(parent.context)
         return MoviesViewHolderTopRatedAndPopular(
@@ -16,15 +17,20 @@ class MoviesAdapterTopRatedAndPopular(private val MoviesList2: List<MovieTopRate
                 R.layout.items_movies_inicio,
                 parent,
                 false
-            )
+            ),clickListener
         )
     }
 
-    override fun getItemCount(): Int = MoviesList2.size
+    override fun getItemCount(): Int = moviesListRatedAndPopular.size
 
 
     override fun onBindViewHolder(holder: MoviesViewHolderTopRatedAndPopular, position: Int) {
-        holder.render(MoviesList2[position])
+        holder.render(moviesListRatedAndPopular[position])
+
+    }
+    fun updateMovies(newMovies: List<MovieHome>) {
+      moviesListRatedAndPopular = newMovies
+        notifyDataSetChanged()
 
     }
 

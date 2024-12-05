@@ -9,7 +9,7 @@ import com.example.katas.databinding.ItemsMoviesInicioBinding
 import com.example.katas.domain.model.MovieDetalle
 
 
-class MoviesViewHolderDetail(view: View) : RecyclerView.ViewHolder(view) {
+class MoviesViewHolderDetail(view: View,private val clickListener: (MovieDetalle) -> Unit) : RecyclerView.ViewHolder(view) {
     val binding = ItemsMoviesInicioBinding.bind(view)
 
 
@@ -22,5 +22,10 @@ class MoviesViewHolderDetail(view: View) : RecyclerView.ViewHolder(view) {
         Glide.with(binding.moviePoster.context)
             .load(imageURL)
             .into(binding.moviePoster)
+
+        itemView.setOnClickListener {
+            clickListener(movie)
+        }
+
     }
 }
