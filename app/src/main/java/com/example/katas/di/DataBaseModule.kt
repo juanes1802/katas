@@ -6,10 +6,14 @@ import com.example.katas.data.model.local.AppDatabase
 import com.example.katas.data.model.local.dao.MovieDao
 import com.example.katas.data.model.local.dao.UserDao
 import com.example.katas.data.repository.LoginRepositoryImpl
+import com.example.katas.data.repository.SingUpRepositoryImpl
 import com.example.katas.data.sharedpreference.Prefs
 import com.example.katas.domain.repository.LoginRepository
+import com.example.katas.domain.repository.SingUpRepository
 import com.example.katas.domain.usecase.login.LoginUseCase
 import com.example.katas.domain.usecase.login.LoginUseCaseImpl
+import com.example.katas.domain.usecase.singup.SignUpUseCase
+import com.example.katas.domain.usecase.singup.SignUpUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -62,5 +66,18 @@ object DataBaseModule {
     fun provideLoginUseCase(loginRepository: LoginRepository): LoginUseCase {
         return LoginUseCaseImpl(loginRepository)
     }
+    @Provides
+    @Singleton
+    fun provideSingUpRepository(userDao: UserDao): SingUpRepository  {
+        return SingUpRepositoryImpl(userDao)
+
+    }
+    @Provides
+    @Singleton
+    fun provideSingUpUseCase(singUpRepository: SingUpRepository): SignUpUseCase {
+        return SignUpUseCaseImpl(singUpRepository)
+    }
+
+
 
 }
