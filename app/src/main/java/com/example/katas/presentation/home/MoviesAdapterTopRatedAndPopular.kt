@@ -7,8 +7,9 @@ import com.example.katas.R
 
 import com.example.katas.domain.model.MovieHome
 
-class MoviesAdapterTopRatedAndPopular(private val moviesListRatedAndPopular: List<MovieHome>) :
+class MoviesAdapterTopRatedAndPopular(private val clickListener: (MovieHome) -> Unit) :
     RecyclerView.Adapter<MoviesViewHolderTopRatedAndPopular>() {
+    private var moviesListRatedAndPopular: List<MovieHome> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolderTopRatedAndPopular {
         val layoutInflater = LayoutInflater.from(parent.context)
         return MoviesViewHolderTopRatedAndPopular(
@@ -16,7 +17,7 @@ class MoviesAdapterTopRatedAndPopular(private val moviesListRatedAndPopular: Lis
                 R.layout.items_movies_inicio,
                 parent,
                 false
-            )
+            ),clickListener
         )
     }
 
@@ -25,6 +26,11 @@ class MoviesAdapterTopRatedAndPopular(private val moviesListRatedAndPopular: Lis
 
     override fun onBindViewHolder(holder: MoviesViewHolderTopRatedAndPopular, position: Int) {
         holder.render(moviesListRatedAndPopular[position])
+
+    }
+    fun updateMovies(newMovies: List<MovieHome>) {
+      moviesListRatedAndPopular = newMovies
+        notifyDataSetChanged()
 
     }
 

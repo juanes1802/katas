@@ -10,16 +10,16 @@ import com.example.katas.data.network.ApiConstants
 import com.example.katas.databinding.ViewMoviesBinding
 import com.example.katas.domain.model.MovieSearch
 
-class MoviesViewHolderSearch(view: View,private val clickListener: (MovieSearch)-> Unit):RecyclerView.ViewHolder(view){
+class MoviesViewHolderSearch(view: View, private val clickListener: (MovieSearch) -> Unit) :
+    RecyclerView.ViewHolder(view) {
     private val binding = ViewMoviesBinding.bind(view)
-
 
 
     fun render(moviesModel: MovieSearch) {
         binding.tvTitle.text = moviesModel.title
         binding.tvYear.text = moviesModel.releaseDate
         binding.tvOverview.text = moviesModel.overview
-        val imageURL =   ApiConstants.IMAGE_URL   + "w500" + moviesModel.posterPath
+        val imageURL = ApiConstants.IMAGE_URL + "w500" + moviesModel.posterPath
 
         Glide.with(binding.imageView.context)
             .load(imageURL)
