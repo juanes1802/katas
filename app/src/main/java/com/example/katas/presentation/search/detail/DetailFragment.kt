@@ -39,8 +39,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
 
         val movieId = args.movieId
-
-
         viewModel.fetchRecommendations(movieId)
         viewModel.fetchMovieDetails(movieId)
         InitRecyclerView()
@@ -48,7 +46,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         configuredObserveDetail()
         binding.btnatrasdetalle.setOnClickListener{
 
-            requireActivity().onBackPressed()
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
 
