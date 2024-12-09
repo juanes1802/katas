@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import com.example.katas.ApplicationMain.Companion.prefs
+import com.example.katas.data.model.local.entity.User
 import com.example.katas.databinding.FragmentPerfilBinding
 import com.example.katas.presentation.login.Login
 
@@ -16,6 +18,8 @@ class PerfilFragment : Fragment() {
     private var _binding: FragmentPerfilBinding? = null
     private val binding get() = _binding!!
     lateinit var Buttonlogout : Button
+    lateinit var Name : TextView
+
 
 
     override fun onCreateView(
@@ -31,13 +35,29 @@ class PerfilFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Buttonlogout = binding.Buttonlogout
+        Name = binding.TextNombrePerfil
 
+
+        GetName()
+
+
+        ButtonLogoutAction()
+
+
+    }
+
+    private fun ButtonLogoutAction() {
         Buttonlogout.setOnClickListener {
             // Acción a realizar al hacer clic en el botón
             logout()
         }
-
     }
+
+    private fun GetName() {
+        val userName = prefs.getName()
+        Name.text = userName ?: "Nombre no disponiible "
+    }
+
     fun logout(){
         prefs.clearSession()
        val intent = Intent(requireContext(), Login::class.java)

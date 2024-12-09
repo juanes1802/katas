@@ -6,7 +6,11 @@ import com.example.katas.data.model.local.dao.MovieDao
 import com.example.katas.data.model.local.entity.MovieEntity
 import com.example.katas.data.network.ApiInterfaceTopRatingAndPopular
 import com.example.katas.domain.model.MovieHome
-import com.example.katas.domain.repository.MovieRepositoryPopularAndRated
+import com.example.domain.repository.MovieRepositoryPopularAndRated
+import com.example.katas.data.mappers.toDataBaseEntity
+
+import com.example.katas.data.mappers.toMovieEntityDomain
+
 import javax.inject.Inject
 
 class MovieRepositoryPopularAndRatedImpl @Inject constructor(
@@ -27,15 +31,18 @@ class MovieRepositoryPopularAndRatedImpl @Inject constructor(
             emptyList()
         }
     }
+
     override suspend fun getPopularMoviesFromdatabase(): List<MovieHome> {
         val response: List<MovieEntity> = movieDao.getAllMovies()
         return response.map { it.toDomainModel() }
 
     }
 
-    override suspend fun InsetPopularMovies(movies: List<MovieEntity>) {
-        movieDao.movieInsertAll(movies)
+    override suspend fun InsetPopularMovies(movies: List<MovieHome>) {
+        val movieEntityList = movies.map { it.toMovieEntityDomain().toDataBaseEntity() }
+        movieDao.movieInsertAll(movieEntityList)
     }
+
 
     override suspend fun ClearMovies() {
         movieDao.deleteAllMovies()
@@ -47,14 +54,15 @@ class MovieRepositoryPopularAndRatedImpl @Inject constructor(
             if (response.isSuccessful) {
                 response.body()?.toDomainModelList()!!
             } else {
-                emptyList()            }
+                emptyList()
+            }
         } catch (e: Exception) {
             emptyList()
         }
     }
 
-    override suspend fun InsetTopRatedMovies(movies: List<MovieEntity>) {
-        movieDao.movieInsertAll(movies)
+    override suspend fun InsetTopRatedMovies(movies: List<MovieHome>) {
+        movieDao.movieInsertAll(movies.map { it.toMovieEntityDomain().toDataBaseEntity() })
     }
 
     override suspend fun ClearTopRatedMovies() {
@@ -62,7 +70,7 @@ class MovieRepositoryPopularAndRatedImpl @Inject constructor(
     }
 
     override suspend fun getTopRatedFromdatabase(): List<MovieHome> {
-     return  movieDao.getAllMovies().map { it.toDomainModel() }
+        return movieDao.getAllMovies().map { it.toDomainModel() }
     }
 
 

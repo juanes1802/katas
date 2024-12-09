@@ -2,7 +2,7 @@ package com.example.katas.presentation.signup
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.katas.domain.usecase.singup.SignUpUseCase
+import com.example.domain.usecase.singup.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

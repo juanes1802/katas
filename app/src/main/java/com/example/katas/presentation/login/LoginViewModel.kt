@@ -2,7 +2,7 @@ package com.example.katas.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.katas.domain.usecase.login.LoginUseCase
+import com.example.domain.usecase.login.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -12,9 +12,10 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
 
     fun loginUSer(email: String, password: String,onSuccess: (String) -> Unit, onError: (String) -> Unit){
      viewModelScope.launch {
-        val user = loginUseCase.login(email,password)
+        val user = loginUseCase.login(email,password,)
          if (user != null){
-             loginUseCase.saveSession(email)
+             loginUseCase.saveSession(
+                 email)
              onSuccess("Bienvenido, ${user.name}")
              }else{
              onError("Credenciales incorrectas")

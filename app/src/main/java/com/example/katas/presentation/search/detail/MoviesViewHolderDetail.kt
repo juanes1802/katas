@@ -3,6 +3,7 @@ package com.example.katas.presentation.search.detail
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.katas.ApplicationMain.Companion.prefs
 import com.example.katas.data.model.entities.MovieDetalleDto
 import com.example.katas.data.network.ApiConstants
 import com.example.katas.databinding.ItemsMoviesInicioBinding
@@ -26,6 +27,8 @@ class MoviesViewHolderDetail(view: View,private val clickListener: (MovieDetalle
         itemView.setOnClickListener {
             clickListener(movie)
         }
+
+
 
     }
 }

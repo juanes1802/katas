@@ -5,7 +5,7 @@ import com.example.katas.data.mappers.toDomainModel
 import com.example.katas.data.mappers.toDomainModelList
 import com.example.katas.data.network.ApiInterfaceDetalle
 import com.example.katas.domain.model.MovieDetalle
-import com.example.katas.domain.repository.MovieRepositoryDetailsAndRecommendations
+import com.example.domain.repository.MovieRepositoryDetailsAndRecommendations
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject

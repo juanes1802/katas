@@ -1,6 +1,7 @@
 package com.example.katas.data.mappers
 
 
+import com.example.domain.model.MovieEntityDomain
 import com.example.katas.data.model.entities.MovieTopRatedAndPopularDto
 import com.example.katas.data.model.local.entity.MovieEntity
 import com.example.katas.data.model.remote.responses.MoviesResponseTopRatedAndPopular
@@ -36,12 +37,32 @@ fun MovieEntity.toDomainModel(): MovieHome {
     )
 }
 
-fun MovieHome.toDatabase() = MovieEntity(
-    id = this.id,
-    title = this.title,
-    rating = this.rating,
-    posterPath = this.posterPath
-)
+
+fun MovieHome.toMovieEntityDomain(): MovieEntityDomain {
+    return MovieEntityDomain(
+        id = this.id,
+        title = this.title,
+        rating = this.rating,
+        posterPath = this.posterPath )
+}
+
+
+
+
+fun MovieEntityDomain.toDataBaseEntity() : MovieEntity {
+    return MovieEntity(
+        id = this.id,
+        title = this.title,
+        rating = this.rating,
+        posterPath = this.posterPath )
+}
+
+
+
+
+
+
+
 
 
 
