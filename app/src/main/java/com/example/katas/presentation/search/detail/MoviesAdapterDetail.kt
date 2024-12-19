@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.katas.R
-import com.example.katas.data.model.entities.MovieDetalleDto
+import com.example.data.model.entities.MovieDetalleDto
 import com.example.katas.domain.model.MovieDetalle
 
 class MoviesAdapterDetail(private val clickListener: (MovieDetalle) -> Unit) : RecyclerView.Adapter<MoviesViewHolderDetail>() {

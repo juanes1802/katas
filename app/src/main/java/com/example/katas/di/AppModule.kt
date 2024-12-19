@@ -1,12 +1,12 @@
 package com.example.katas.di
 
-import com.example.katas.data.model.local.dao.MovieDao
-import com.example.katas.data.network.ApiInterfaceBuscar
-import com.example.katas.data.network.ApiInterfaceDetalle
-import com.example.katas.data.network.ApiInterfaceTopRatingAndPopular
-import com.example.katas.data.repository.MovieRepositoryDetailsAndRecommendationsImpl
-import com.example.katas.data.repository.MovieRepositoryPopularAndRatedImpl
-import com.example.katas.data.repository.MovieRepositorySearchImpl
+import com.example.data.model.local.dao.MovieDao
+import com.example.data.network.ApiInterfaceBuscar
+import com.example.data.network.ApiInterfaceDetalle
+import com.example.data.network.ApiInterfaceTopRatingAndPopular
+import com.example.data.repository.MovieRepositoryDetailsAndRecommendationsImpl
+import com.example.data.repository.MovieRepositoryPopularAndRatedImpl
+import com.example.data.repository.MovieRepositorySearchImpl
 import com.example.domain.repository.MovieRepositoryDetailsAndRecommendations
 import com.example.domain.repository.MovieRepositoryPopularAndRated
 import com.example.katas.domain.repository.MovieRepositorySearch
@@ -61,7 +61,7 @@ object AppModule {
 
     // Proporcionar MovieRepositoryPopularAndRated
     @Provides
-    fun provideMovieRepositoryPopularAndRated(apiService: ApiInterfaceTopRatingAndPopular,movieDao: MovieDao): MovieRepositoryPopularAndRated {
+    fun provideMovieRepositoryPopularAndRated(apiService: ApiInterfaceTopRatingAndPopular, movieDao: MovieDao): MovieRepositoryPopularAndRated {
         return MovieRepositoryPopularAndRatedImpl(apiService,movieDao)
     }
 

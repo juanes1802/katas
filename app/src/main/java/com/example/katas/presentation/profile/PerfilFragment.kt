@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.example.katas.ApplicationMain.Companion.prefs
-import com.example.katas.data.model.local.entity.User
+import com.example.data.model.local.entity.User
 import com.example.katas.databinding.FragmentPerfilBinding
 import com.example.katas.presentation.login.Login
 
