@@ -9,12 +9,16 @@ class LoginUseCaseImpl(private val loginRepository: LoginRepository) : LoginUseC
      return loginRepository.loginUser(email,password)
     }
 
-    override fun saveSession(email: String ) {
+    override suspend fun saveSession(email: String ) {
        loginRepository.saveUserSession(email)
     }
 
     override fun getSession(): String {
       return loginRepository.getUserSession()
+    }
+
+    override suspend fun getUserByEmail(email: String): UserDomain? {
+       return  loginRepository.getUserByEmail(email)
     }
 
     override fun clearSession() {

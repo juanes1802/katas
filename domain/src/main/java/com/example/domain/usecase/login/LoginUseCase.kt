@@ -5,8 +5,9 @@ import com.example.domain.model.UserDomain
 
 interface LoginUseCase {
     suspend fun  login(email: String, password: String): UserDomain?
-    fun saveSession(email:String)
+     suspend fun saveSession(email:String)
     fun getSession(): String
+    suspend fun  getUserByEmail(email: String): UserDomain?
     fun clearSession()
 
 }

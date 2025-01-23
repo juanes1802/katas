@@ -14,6 +14,8 @@ kotlin {
     }
 }
 dependencies {
+    testImplementation (libs.junit)
+    testImplementation (libs.mockk) // Asegúrate de usar la última versión
 
 
 }

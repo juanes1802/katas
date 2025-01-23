@@ -23,6 +23,10 @@ class LoginRepositoryImpl @Inject constructor(private  val userDao: UserDao,
         return prefs.getName()
     }
 
+    override suspend fun getUserByEmail(email: String): UserDomain? {
+    return  userDao.getUserByEmail(email)?.toDomainModel()
+    }
+
     override fun clearSession() {
       prefs.clearSession()
     }

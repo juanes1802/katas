@@ -7,5 +7,6 @@ interface LoginRepository {
     suspend fun  loginUser(email: String, password: String): UserDomain?
     fun saveUserSession(email: String)
     fun getUserSession(): String
+    suspend fun  getUserByEmail(email: String): UserDomain?
     fun clearSession()
 }
