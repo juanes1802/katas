@@ -54,6 +54,8 @@ class BuscarFragment : Fragment(R.layout.fragment_movies) {
         moviesfiltered()
     }
 
+
+
     private fun loadconfigurationfortheview() {
         searchViewModel.loadMovies()
     }

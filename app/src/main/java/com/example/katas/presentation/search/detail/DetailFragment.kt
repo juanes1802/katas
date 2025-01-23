@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.katas.R
-import com.example.katas.data.network.ApiService.Companion.IMAGE_URL
+import com.example.data.network.ApiService.Companion.IMAGE_URL
 import com.example.katas.databinding.FragmentDetailBinding
 
 import com.example.katas.domain.model.MovieDetalle

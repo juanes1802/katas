@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.katas.R
-import com.example.katas.data.model.local.AppDatabase
-import com.example.katas.data.model.local.entity.User
+import com.example.data.model.local.AppDatabase
+import com.example.data.model.local.entity.User
 import com.example.katas.presentation.login.Login
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

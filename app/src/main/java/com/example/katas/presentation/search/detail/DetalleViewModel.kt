@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.katas.data.network.ApiInterfaceDetalle
+import com.example.data.network.ApiInterfaceDetalle
 import com.example.katas.domain.model.MovieDetalle
-import com.example.katas.domain.usecase.detail.GetMovieDetailUseCase
+import com.example.domain.usecase.detail.GetMovieDetailUseCase
 import com.example.katas.domain.usecase.detail.recomendations.GetMovieRecomendationsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

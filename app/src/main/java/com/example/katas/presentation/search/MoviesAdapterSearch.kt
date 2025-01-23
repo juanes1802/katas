@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 import com.example.katas.R
-import com.example.katas.data.model.entities.MovieSearchDto
+import com.example.data.model.entities.MovieSearchDto
 import com.example.katas.domain.model.MovieSearch
 
 class MoviesAdapterSearch(private val clickListener: (MovieSearch)->Unit) :

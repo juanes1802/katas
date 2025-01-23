@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.katas.domain.model.MovieSearch
-import com.example.katas.domain.usecase.search.GetMovieSearchUseCase
-import com.example.katas.data.network.ApiInterfaceBuscar
+import com.example.domain.usecase.search.GetMovieSearchUseCase
+import com.example.data.network.ApiInterfaceBuscar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.Locale
