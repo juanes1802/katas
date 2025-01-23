@@ -1,7 +1,7 @@
 package com.example.katas
 
 import android.app.Application
-import com.example.katas.data.sharedpreference.Prefs
+import com.example.data.sharedpreference.Prefs
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
